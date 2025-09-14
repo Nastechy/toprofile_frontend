@@ -1,0 +1,284 @@
+.container{
+     background-color: #004A54;
+    color:white;
+}
+.main{
+    background-color: #004A54;
+    padding: 30px 30px 10px 30px;
+}
+.cont{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* border: 1px solid red; */
+}
+.divone{
+    /* background-color: red; */
+    /* height: 100%; */
+}
+.footer{
+    width: 50%;
+    height: auto;
+}
+.abtcont{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.text{
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    /* background-color: red; */
+}
+.texts{
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+}
+.label{
+    font-size: 1.0rem;
+    line-height: 1.0rem;
+    /* color: #72D7E3; */
+    /* background-color: red; */
+   
+}
+.subcont{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+}
+.white{
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon{
+    color: #007A89;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.linecont{
+    padding: 0 20px;
+}
+.lastcont{
+    padding: 30px 0;
+}
+.lasttxt{
+    text-align: center;
+    font-size: 0.8rem;
+}
+.conticon{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* background-color: red; */
+}
+.iconew{
+    width: 12px;
+    height: 12px;
+}
+.link{
+    color: white;
+    list-style: none;
+    text-decoration: none;
+}
+
+@media (min-width:768px) {
+    .main{
+        background-color: #004A54;
+        padding: 50px 50px 10px 50px;
+    } 
+    .text{
+        font-size: 1.1rem;
+        line-height: 2.2rem;
+    }
+    .texts{
+        font-size: 1.1rem;
+        line-height: 2.2rem;
+        width: 90%;
+    }
+    .label{
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+    }
+    .footer{
+        width: 30%;
+        height: auto;
+    }
+    .cont{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .white{
+        height: 38px;
+        width: 38px;
+        background-color: white;
+        border-radius: 100%;
+         
+    }
+    .icon{
+        color: #007A89;
+        height: 25px;
+        width: 25px;
+    }
+    .subcont{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 30px 0;
+    }
+    .linecont{
+        padding: 0 30px;
+    }
+    .lasttxt{
+        text-align: center;
+        font-size: 1.0rem;
+    }
+    .iconew{
+        width: 18px;
+        height: 18px;
+    }
+    .conticon{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        /* background-color: red; */
+    }
+  
+    
+}
+
+
+@media (min-width:1024px) {
+    .main{
+      
+        padding: 50px 100px ;
+    }
+    .linecont{
+        padding: 0 50px;
+    }
+  
+    .cont{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        height: 35vh;
+    } 
+     
+    .divone{
+        flex: 5;
+        /* background-color: red; */
+        height: 100%;
+    }
+    .divtwo{
+        flex: 2;
+    }
+    .divthree{
+        flex: 2;
+       
+    }
+    .divfour{
+        flex: 2;
+       
+    }
+    .footer{
+        width: 50%;
+        height: auto;
+    }
+    .text{
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+    }
+    .texts{
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+        width: 70%;
+    }
+    .label{
+        font-size: 1.0rem;
+        line-height: 1.8rem;
+    }
+    .white{
+        height: 30px;
+        width: 30px;
+        background-color: white;
+        border-radius: 100%;
+         
+    }
+    .icon{
+        color: #007A89;
+        height: 20px;
+        width: 20px;
+    }
+    .subcont{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0px 0;
+    }
+    .lasttxt{
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    .iconew{
+        width: 13px;
+        height: 13px;
+    }
+  
+}
+
+
+
+@media (min-width:1280px) {
+    .text{
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+    }
+    .texts{
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+        width: 70%;
+    }
+    .label{
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+    }
+    .cont{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        height: 29vh;
+    }
+    .abtcont{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .cont{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        /* height: 30vh; */
+      
+    } 
+    .linecont{
+        padding: 0 60px;
+    }
+    .lasttxt{
+        text-align: center;
+        font-size: 0.9rem;
+    }
+  
+}

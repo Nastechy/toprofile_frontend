@@ -1,0 +1,20 @@
+.main{
+    background-image: url(../../../../../public//img//house.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+height: 50vh;
+}
+
+
+@media (min-width:768px) {
+    .main{
+        height: 70vh;
+    }
+}
+
+@media (min-width:1024px) {
+    .main{
+        height: 70vh;
+    }
+}

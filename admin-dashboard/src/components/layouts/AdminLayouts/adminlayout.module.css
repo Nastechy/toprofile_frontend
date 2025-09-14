@@ -1,0 +1,180 @@
+.maincont {
+    /* min-width: 100vw; */
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: column;
+    transition: all 0.9s ease;
+    visibility: hidden;
+  }
+  
+  .subcont{
+     /* border: 1px solid red; */
+      display: flex;
+      flex-direction: row;
+      /* margin-top: 40px; */
+      /* max-height: 80vh; /* */
+      background-color: #F3F3F3;
+  }
+  .subcontone{
+    display: none;
+  /* flex: 1; */
+  background-color: #2a392a;
+    color: white;
+    /* border: 3px solid red; */
+  /* min-height: 100vh; */
+  }
+  .subcontwo {
+    width: 100%; 
+  }
+  
+  .menu{
+    display: block;
+    padding: 10px 0;
+    color: #007D8D;
+  
+  
+  }
+  /* .menuOpen.maincont{
+    height: 70vh;
+    
+  }
+  .menuOpen.subcont {
+    max-height: 80vh; 
+   
+  } */
+  .menuOpen .subcontone {
+    width: 80%;
+    display: block;
+   /* background-color: yellow; */
+   /* border: 2px solid red; */
+   /* margin-top: 70px; */
+   height: 100vh;
+  }
+  .menuOpen .subcontwo {
+    width: 0; 
+    overflow: hidden;
+   
+  }
+  .button{
+    display: flex;
+    align-items: center;
+    /* padding: 5px 10px; */
+    color: #00B0C7;
+    border-radius: 3px;
+    gap: 10px;
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+  
+  .cont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .container{
+    border: 1px solid gray;
+  }
+  .subcontone{
+    /* background-color: green; */
+    /* height: 20vh; */
+  }
+  .icon{
+    width: 20px;
+    height: 20px;
+    color: #00B0C7;
+  }
+  
+  
+  
+  
+  @media (min-width:768px) {
+    .menuOpen .subcontone {
+      width: 100%;
+      display: block;
+      height: 100vh;
+    }
+  
+    .menuOpen .subcontwo {
+      width: 0; 
+      overflow: hidden;
+      
+     
+    }
+    .icon{
+      width: 30px;
+      height: 30px;
+    }
+    .button{
+      font-size: 1.3rem;
+      line-height: 1rem;
+    }
+    .subcont{
+      /* margin-top: 50px; */
+    }
+    .menuOpen.maincont{
+      height: 100vh;
+      /* background-color: red; */
+    }
+    .menuOpen.subcont {
+    height: 70vh; 
+    }
+  
+    
+  }
+  
+  
+  @media (min-width:1024px) {
+    .maincont{
+     /* min-height: 200vh; */
+     visibility: visible;
+    }
+    .subcontone{
+      display: block;
+    flex: 1;
+    /* border-right:  0.5px solid gray; */
+    /* height: 100vh; */
+    /* background-color: red; */
+    }
+     .subcontwo{
+    flex: 3;
+     /* padding: 20px; */
+    /* border: 1px solid gray; */
+    /* background-color: blue; */
+    /* min-height: 100vh; */
+    }
+    
+    .menuOpen.maincont{
+      height: 0;
+    }
+    .menuOpen.subcont {
+      max-height: 100vh; 
+    }
+    .menuOpen .subcontone {
+      
+       margin-top: 0;
+      }
+    
+    
+    
+    .menu{
+      display: block;
+  }
+ 
+    .subcont{
+      /* margin-top: 30px; */
+      min-height: 100vh;
+     
+    }
+  
+  }
+  
+  
+  
+  @media (min-width:1280px) {
+    .subcontone{
+    flex: 0.92;
+   
+    
+    
+    }
+  }

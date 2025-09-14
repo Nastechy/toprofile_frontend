@@ -1,0 +1,19 @@
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+    .slick-slide {
+        display: block !important;
+    }
+}
+
+/* For desktop devices */
+@media screen and (min-width: 769px) {
+    .slick-slide {
+        display: none !important;
+    }
+    .slick-slide:first-child {
+        display: block !important;
+    }
+    .slick-slide:nth-child(n + 4) {
+        display: block !important;
+    }
+}

@@ -1,0 +1,345 @@
+.main{
+    /* padding:15px 20px; */
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+.div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   padding-right: 80px;
+    background-color: red;
+}
+.header {
+    transition: background-color 0.3s ease;
+  }
+  .icon{
+    color: #DD4C23;
+  }
+  .dropdownIcon {
+    transition: color 0.3s ease;
+  }
+  
+  .orangeIcon {
+    color: #DD4C23;
+  }
+  
+  
+  
+  /* Change text color to orange when sticky */
+  .sticky li,
+  .sticky li:hover,
+  .sticky .menuicon,
+  .sticky .menuicon:hover
+  .sticky .icon {
+    color: #DD4C23;
+  }
+  
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white; /* Adjust background color as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+  }
+  .scrolling .text-white {
+    color: black;
+  }
+.textcont{
+    flex: 1;
+    padding:15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+}
+.lastcont{
+    flex:1;
+    padding:5px 20px 10px 20px;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+.bold{
+    font-weight: bolder;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+.listcont{
+    display: none;
+}
+.list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.mobilelistcont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 26%; /* Adjust this value as needed */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: #F8FAFC;
+    color: var(--second-text-color, #737373);
+    padding: 20px 0;
+    width: 100%;
+    box-shadow: 0px 9px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  
+
+.item{
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    line-height: 1rem;
+  
+}
+.searchcont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    padding: 5px 10px;
+    /* gap: 15px; */
+    border: none;
+    flex: 3;
+}
+.inputcont{
+    background-color: transparent;
+    color: gray;
+   outline: none;
+   font-size: 0.7rem;
+   line-height: 1rem;
+   border: none;
+   width: 80%;
+   border: none;
+}
+.icon{
+    width:18px;
+    height: 18px;
+    color: var(--primary-color, #23A6F0)
+    /* color: gray; */
+}
+.text{
+     color: var(--primary-color, #23A6F0)
+}
+.mobicon{
+    width:18px;
+    height: 18px;
+}
+.sublast{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+.subdiv{
+    display: flex;
+}
+.menuicon{
+    width: 30px;
+    height: 30px;
+    display: block;
+    color: white
+    /* color: gray; */
+}
+.link{
+    text-decoration: none;
+    list-style: none;
+    color: var(--second-text-color, #737373);
+}
+.link:hover{
+   color: #516EFF;
+    
+}
+
+
+
+
+
+@media (min-width:768px) {
+    .textcont{
+        padding:25px 35px;
+    }
+    .bold{
+        font-size: 1.7rem;
+        line-height: 1.5rem;
+    }
+    
+    .menuicon{
+        width: 65px;
+        height: 65px;
+    }
+    .lastcont{
+        gap: 0px;
+        padding:0px 35px 20px 35px;
+    }
+    .inputcont{
+       font-size:1.2rem;
+       line-height: 1rem;
+       border: none;
+       width: 80%;
+       padding: 10px;
+    }
+    .mobicon{
+        width: 35px;
+        height: 35px;
+    }
+    .sublast{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        flex: 1;
+    }
+  
+    .item{
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        line-height: 1rem;
+    }
+    
+    
+    .mobilelistcont {
+        top: 25%;
+           padding: 30px 0;
+           
+          
+      }
+  
+}
+
+
+@media (min-width:1024px) {
+    .main{
+        padding:20px 64px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+       /* gap: 20px; */
+       /* background-color: red; */
+    }
+    .bold{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .textcont{
+    
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        position: unset;
+        padding: 0;
+    }
+    .icon{
+        width: 25px;
+        height: 25px;
+    }
+    .inputcont{
+       font-size: 0.8rem;
+       line-height: 1rem;
+       padding: 0px;
+    }
+   
+    .listcont{
+        display: block;
+    }
+    .menuicon{
+        display: none;
+    }
+    .sublast{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+    }
+    .list{
+        font-size: 0.8rem;
+        line-height: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    
+    .searchcont{
+        /* background-color: green; */
+        border: none;
+    }
+    .item{
+        padding: 12px 0px;
+        font-size: 0.9rem;
+        line-height: 1rem;
+    }
+    .inputcont{
+        width: 100%;
+    }
+
+}
+
+@media (min-width:1280px) {
+    .main{
+        padding:20px 58px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       gap: 20px
+    }
+    .bold{
+        font-size: 1.8rem;
+        line-height: 2rem;
+    }
+    .inputcont{
+        font-size: 0.9rem;
+        line-height: 1rem;
+     }
+     .icon{
+        width: 25px;
+        height: 25px;
+    }
+    .list{
+        font-size: 1.0rem;
+        line-height: 1rem;
+        gap: 50px;
+    }
+   
+   
+    .item{
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+     .icon{
+        width: 30px;
+        height: 30px;
+    }
+     
+     
+}

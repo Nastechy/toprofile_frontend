@@ -1,0 +1,161 @@
+.main {
+    position: relative;
+    /* height: 70vh; */
+    color: #FFFFFF; /* Set text color to white */
+}
+
+.main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../../../../public//img/hh.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(50%); /* Darkens the background image to 50% */
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+.submain{
+    display: flex;
+    flex-direction: column-reverse;
+  padding: 200px 0 0 0;
+    /* height: 20vh; */
+    
+  
+}
+.subsub{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding:30px 20px;
+    flex:1;
+    background-color: #222222;
+    height: 100%;
+ 
+}
+.subsubsub{
+    flex:1;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding:20px;
+   
+}
+.fixedMessageContainer {
+    position: fixed;
+    bottom: 170px; /* Adjust this value as per your design */
+    right: 20px; /* Adjust this value as per your design */
+    z-index: 999; /* Ensure it's above other content */
+  }
+  
+
+@media (min-width:768px) {
+    .submain{
+      padding: 400px 0 0 0;
+        /* height: 20vh; */
+        
+      
+    }
+    .subsub {
+        /* height: 70vh; */
+        padding:40px 30px;
+        gap: 23px;
+    }
+    .subsubsub {
+        /* height: 70vh; */
+        padding:30px;
+        gap: 15px;
+    }
+    .fixedMessageContainer {
+        position: fixed;
+        bottom: 190px; /* Adjust this value as per your design */
+        right: 20px; /* Adjust this value as per your design */
+        z-index: 999; /* Ensure it's above other content */
+      }
+   
+}
+
+@media (min-width:1024px) {
+    .main {
+        /* height: 100vh; */
+    }
+    .fixedMessageContainer {
+        position: fixed;
+        bottom: 20px; /* Adjust this value as per your design */
+        right: 20px; /* Adjust this value as per your design */
+        z-index: 999; /* Ensure it's above other content */
+      }
+   
+    .submain{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 100px 0 0 0;
+      
+    }
+    .subsub{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 70px;
+        gap: 10px;
+        flex:1;
+        background-color: #222222;
+        height: 100%;
+     
+    }
+    .subsubsub{
+        flex:1;
+        padding: 40px 30px;
+        background-color: white;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+       
+    }
+}
+
+
+@media (min-width:1280px) {
+    .submain{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 150px 0 0 0;
+      
+    }
+    
+    .subsub{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding:40px 70px;
+        gap: 20px;
+        flex:1;
+        background-color: #222222;
+        height: 100%;
+     
+    }
+    .subsubsub{
+        flex:1;
+        padding: 40px 30px;
+        background-color: white;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+       
+    }
+}

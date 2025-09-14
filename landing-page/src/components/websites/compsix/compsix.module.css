@@ -1,0 +1,58 @@
+.main {
+    position: relative;
+    /* height: 70vh; */
+    color: #FFFFFF; /* Set text color to white */
+}
+
+.main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../../../../public//img/house.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(50%); /* Darkens the background image to 50% */
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+.submain{
+    display: flex;
+    flex-direction: column-reverse;
+  padding: 200px 0 0 0;
+    /* height: 20vh; */
+    
+  
+}
+
+
+@media (min-width:768px) {
+    .submain{
+      padding: 400px 0 0 0;
+        /* height: 20vh; */   
+    }
+    
+   
+}
+
+@media (min-width:1024px) {
+    .main {
+        /* height: 100vh; */
+    }
+    
+}
+
+
+@media (min-width:1280px) {
+    .submain{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 150px 0 0 0;
+      
+    }
+    
+
+}

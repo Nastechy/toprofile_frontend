@@ -1,0 +1,46 @@
+/* Active dot style */
+.slick-dots .active-dot {
+    background-color: #EB6C1F; /* Present color */
+}
+
+/* Inactive dot style */
+.slick-dots .inactive-dot {
+    background-color: red; /* Red color */
+}
+
+.textContainer {
+    height: 170px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* background-color: blanchedalmond; */
+  
+}
+
+
+@media (min-width:768px) {
+    .textContainer {
+        height: 300px; /* Adjust height as needed */
+      
+    }
+}
+@media (min-width: 820px) and (max-width: 1023px) {
+    .textContainer {
+        height: 250px; /* Adjust height as needed */
+       
+    }
+}
+
+@media (min-width:1024px) {
+    .textContainer {
+        height: 200px; /* Adjust height as needed */
+      
+    }
+}
+
+@media (min-width:1280px) {
+    .textContainer {
+        height: 250px; /* Adjust height as needed */
+      
+    }
+}
