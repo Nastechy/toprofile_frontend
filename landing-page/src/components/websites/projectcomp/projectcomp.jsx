@@ -1,448 +1,226 @@
-// "use client"
-// import React, { useState, useEffect } from 'react';
-// import Image from 'next/image'
-// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-// import multi from '../../../../public/img/multi.png'
-// import dem from '../../../../public/img/dem.jpg'
-// import win from '../../../../public/img/win.jpeg'
-// import wm from '../../../../public/img/wm.jpeg'
-// import rck from '../../../../public/img/rck.jpeg'
-// import bd from '../../../../public/img/bd.jpg'
-// import eden from '../../../../public/img/eden.jpg'
-// import nnfo from '../../../../public/img/nnw4.jpeg'
-// import nnf from '../../../../public/img/nnw5.jpeg'
-// import dp from '../../../../public/img/dp.jpg'
-// import { LuBedDouble, LuBath } from "react-icons/lu";
-// import { FaLandmark } from 'react-icons/fa';
-// import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-// import { AiOutlineArrowLeft, AiOutlineSearch } from 'react-icons/ai';
-// import { BsHouse } from "react-icons/bs";
-// import Link from 'next/link'
-// import { useRouter } from 'next/navigation';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
-// import { useParams } from 'next/navigation';
-
-
-// const Projectcomp = () => {
-
-//     const router = useRouter(); // No need to useState for router
-
-//     const details = [
-//         // {
-//         //     id: 1,
-//         //     pic: win,
-//         //     label: "WINGATE ESTATE KUJE ABUJA",
-//         //     text: "4 BEDROOMS TERRACE DUPLEX",
-//         //     sqr: "250 SQM",
-//         //     price: "₦1,200,000.00",
-//         // },
-//         {
-//             id: 1,
-//             pic: nnfo,
-//             label: "DYNASTY CITY GUZAPE 2 ABUJA",
-//             text: "5 BEDROOMS FULLY DETACHED DUPLEX WITH DETACHED BQ",
-//             sqr: "600 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 2,
-//             pic: wm,
-//             label: "WEMBLEY CITY JIKWOYI ABUJA",
-//             text: "2 BEDROOMS TERRACE DUPLEX",
-//             sqr: "180 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 3,
-//             pic: eden,
-//             label: "EDENLAND KURUDU ABUJA",
-//             text: "2 BEDROOMS TERRACE DUPLEX WITH ATTACHED BQ",
-//             sqr: "180 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 4,
-//             pic: dem,
-//             label: "DOUBLE KING VILLA GUZAPE 2 ABUJA",
-//             text: "4 BEDROOMS SEMI-DETACHED PENTHOUSE",
-//             sqr: "350 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 5,
-//             pic: dem,
-//             label: "DOUBLE KING LEISURE VIEW ESTATE ABUJA",
-//             text: "4 BEDROOM TERRACE DUPLEX",
-//             sqr: "250 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 6,
-//             pic: rck,
-//             label: "ROYALHILLS ESTATE ASOKORO EXTENSION ABUJA",
-//             text: "2 BEDROOMS TERRACE DUPLEX WITH AN ATTACHED BQ",
-//             sqr: "300 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 7,
-//             pic: dp,
-//             label: "TREASURELAND ESTATE JIKWOYI ABUJA",
-//             text: "2 BEDROOMS TERRACE DUPLEX WITH ATTACHED BQ",
-//             sqr: "180 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         {
-//             id: 8,
-//             pic: bd,
-//             label: "NEFT COURT IDU ABUJA",
-//             text: "4 BEDROOMS TERRACE DUPLEX WITH ATTACHED BQ",
-//             sqr: "250 SQM",
-//             price: "₦1,200,000.00",
-//         },
-//         // {
-//         //     id: 9,
-//         //     pic: nnfo,
-//         //     label: "DYNASTY CITY GUZAPE 2 ABUJA",
-//         //     text: "5 BEDROOMS FULLY DETACHED DUPLEX WITH DETACHED BQ",
-//         //     sqr: "600 SQM",
-//         //     price: "₦1,200,000.00",
-//         // },
-//         {
-//             id: 10,
-//             pic: nnf,
-//             label: "VELVET VILLA ASOKORO EXT ABUJA",
-//             text: "5 BEDROOMS TERRACE DUPLEX",
-//             sqr: "250 SQM",
-//             price: "₦1,200,000.00",
-//         },
-
-//     ];
-
-//     const handleSearch = (values, { setSubmitting }) => {
-//         // Handle search logic here
-//         console.log('Searching for:', values.searchTerm);
-//         setSubmitting(false);
-//     };
-
-//     const ITEMS_PER_PAGE = 6;
-//     const property = { items: details }; // Assuming you want to paginate over `details`
-
-
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const [loading, setLoading] = useState(false);
-
-
-
-//     const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
-//     const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-//     const currentItems = property ? property.items.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-//     const totalPages = property ? Math.ceil(property.items.length / ITEMS_PER_PAGE) : 1;
-
-//     const paginate = (pageNumber) => {
-//         setLoading(true);
-//         setTimeout(() => {
-//             setCurrentPage(Math.min(Math.max(pageNumber, 1), totalPages));
-//             setLoading(false);
-//         }, 1000);
-//     };
-
-//     useEffect(() => {
-//         window.scrollTo(0, 0);
-//     }, [currentPage]);
-
-//     if (!property) {
-//         return <div>Property not found</div>;
-//     }
-
-
-
-
-
-
-//     return (
-//         <div className='bg-gray'>
-//             <div className='flex items-center justify-center relative'>
-//                 <div className='bg-white w-[80%] lg:w-[50%]  rounded-2xl p-10 md:p-20 lg:p-10 xl:p-16 flex flex-col gap-4 absolute top-[-4rem] md:top-[-13rem] lg:top-[-5rem] xl:top-[-8rem]'>
-
-//                     <Formik
-//                         initialValues={{ searchTerm: '' }}
-//                         validationSchema={Yup.object({
-//                             searchTerm: Yup.string().required('Search term is required')
-//                         })}
-//                         onSubmit={handleSearch}
-//                     >
-//                         <Form className='flex flex-col gap-3 md:gap-4'>
-//                             <p className='text-sm md:text-2xl lg:text-base xl:text-lg '>Search:</p>
-//                             <div className='bg-gray flex items-center px-3 py-2 md:py-4 md:px-5 lg:px-3 lg:py-3 gap-2'>
-//                                 <AiOutlineSearch className='text-orange h-4 w-4 md:h-8 md:w-8 lg:h-6 lg:w-6' />
-//                                 <Field
-//                                     type="text"
-//                                     name="searchTerm"
-//                                     placeholder="Search For Property"
-//                                     className='text-xs md:text-xl lg:text-sm xl:text-base bg-transparent outline-none'
-//                                 />
-//                             </div>
-//                             <ErrorMessage name="searchTerm" component="div" className="text-red-600 text-xs md:text-xl lg:text-sm" />
-
-//                             <button type="submit" className='bg-orange text-white text-xs md:text-2xl lg:text-base xl:text-lg w-[40%] lg:w-[30%]  px-4 py-1 md:py-3 lg:py-2'>Search</button>
-//                         </Form>
-//                     </Formik>
-//                 </div>
-
-//             </div>
-
-
-
-
-//             <div className='bg-gray-200 pt-[11rem] pb-10  px-5 md:px-10 md:pt-[14rem] lg:pt-[14rem] xl:pt-[15rem] lg:px-10 xl:px-12 '>
-
-//                 <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-8 lg:gap-5'>
-//                     {
-//                         currentItems.map((datum) => (
-//                             <div className='hover:shadow-2xl shadow-slate-500 ' key={datum.id}>
-//                                 <div className=' hover:bg-fad flex flex-col gap-2 md:gap-4 px-4 py-4 md:py-6 lg:px-6 lg:py-8 shadow-2xl shadow-slate-400'>
-
-//                                     <div className='bg-white pb-3 md:pb-6 lg:pb-4 rounded-t-xl'>
-//                                         <div className='h-48 w-full'>
-//                                             <Image src={datum.pic} alt='pic-img' className='rounded-t-xl' style={{ width: '100%', height: '100%' }} />
-//                                         </div>
-
-//                                         <div className='px-5 pt-4 md:px-2 lg:px-5 flex flex-col justify-between items-stretch'>
-//                                             <p className='text-xs md:text-lg lg:text-sm font-medium flex-grow'>
-//                                                 {datum.label}
-//                                             </p>
-//                                             <div className='border-gray border-b-[1px] mt-2 md:mt-2 lg:mt-1'></div>
-//                                         </div>
-
-
-//                                         <div className='px-5 pt-2 md:px-2 lg:px-5 '>
-
-//                                             <div className='flex items-stretch '>
-//                                                 <p className=' text-xs md:text-lg lg:text-sm leading-5 font-light flex-grow'>{datum.text}</p>
-
-//                                             </div>
-//                                             <div className='border-gray border-b-[1px] mt-2 md:mt-5 lg:mt-2'></div>
-
-//                                         </div>
-
-//                                         <div className='px-5 pt-2 md:px-2 lg:px-5 '>
-
-//                                             <div className=' flex items-center justify-between gap-2 md:gap-2 lg:gap-2'>
-//                                                 <div className='flex items-center gap-1 md:gap-1 lg:gap-2'>
-//                                                     <FaLandmark className='text-orange h-3 w-3 md:h-5 md:w-5 lg:h-4 lg:w-4 xl:h-5 xl:w-5' />
-//                                                     <p className=' text-xs md:text-lg lg:text-sm  leading-5 font-light'>{datum.sqr}</p>
-//                                                 </div>
-
-//                                             </div>
-//                                             <div className='border-gray border-b-[1px] mt-2 md:mt-5'></div>
-//                                             <Link href={`/properties/${datum.label.replace(/ /g, '-').toLowerCase()}`} className='hover:bg-lite' >
-//                                                 <div className=' flex items-center justify-between gap-2 md:gap-2 lg:gap-2 pt-3'>
-//                                                     <button className='flex justify-center items-center gap-4 border bg-orange text-white text-xs md:text-lg  lg:text-sm px-6 py-2 md:py-2 lg:py-2' >
-//                                                         VIEW PROPERTY
-//                                                     </button>
-
-//                                                 </div>
-//                                             </Link>
-
-
-
-//                                         </div>
-
-
-
-//                                         {/* <div className='pb-2 md:pb-5 px-5 flex flex-col gap-1 md:gap-2 '>
-//  <p className='text-slate-400 text-xs md:text-xl lg:text-sm xl:text-base leading-5 font-light'>Price</p>
-//  <p className=' text-xs md:text-xl lg:text-sm xl:text-base leading-5 font-light'>{datum.price}</p>
-// </div> */}
-//                                     </div>
-
-//                                 </div>
-//                             </div>
-//                         ))
-//                     }
-//                 </div>
-
-
-
-
-//                 {/* Pagination Controls */}
-//                 <div className='flex items-center justify-center gap-2 md:gap-4 pt-10 pb-5 md:pt-16 lg:pt-20 xl:pt-[24rem] cursor-pointer'>
-//                     <div
-//                         className='gap-2 p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100'
-//                         onClick={() => paginate(currentPage - 1)}
-//                     >
-//                         <IoIosArrowBack className='h-5 w-5 md:w-7 md:h-7 lg:h-7 lg:w-7 xl:h-8 xl:w-8' />
-//                     </div>
-
-//                     {[...Array(totalPages)].map((_, index) => (
-//                         <div
-//                             key={index + 1}
-//                             className={`gap-2 p-2 flex justify-center items-center shadow-2xl h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100 ${currentPage === index + 1 ? 'bg-lite text-fad ' : 'bg-white text-black '}`}
-//                             onClick={() => paginate(index + 1)}
-//                         >
-//                             <p className='text-xs md:text-xl lg:text-sm xl:text-base'>{index + 1}</p>
-//                         </div>
-//                     ))}
-
-//                     <div
-//                         className='gap-2 p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100'
-//                         onClick={() => paginate(currentPage + 1)}
-//                     >
-//                         <IoIosArrowForward className='h-5 w-5 md:w-7 md:h-7 lg:h-7 lg:w-7 xl:h-8 xl:w-8' />
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Projectcomp
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Image from "next/image";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaLandmark } from "react-icons/fa";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-// bring in your helpers
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
 import { URL } from "@/components/utils/client";
+import { getTokenTOLocalStorage } from "@/components/utils/storage";
 
 const ITEMS_PER_PAGE = 6;
 
-const Projectcomp = () => {
-  const router = useRouter();
+/** Map backend category id -> human label */
+const categoryLabel = (cat) => {
+  const id =
+    typeof cat === "object" && cat !== null
+      ? Number(cat?.id ?? cat?.value ?? cat)
+      : Number(cat);
+  switch (id) {
+    case 1:
+      return "Land";
+    case 2:
+      return "Houses";
+    default:
+      return "Other";
+  }
+};
 
-  // API data & meta
+/** Format NGN amounts if numeric, otherwise show raw */
+const formatAmount = (val) => {
+  const n = Number(val);
+  if (!isNaN(n)) {
+    try {
+      return new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        maximumFractionDigits: 0,
+      }).format(n);
+    } catch {
+      return `₦${n.toLocaleString()}`;
+    }
+  }
+  return val ?? "";
+};
+
+const Projectcomp = () => {
+  const [token, setToken] = useState(null);
+
+  // Listing (API-driven)
   const [properties, setProperties] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [totalEntries, setTotalEntries] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // UI state
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // start true so we never flash "No property available" before data
   const [error, setError] = useState(null);
-
-  // simple client-side search term
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch properties from API
-  const fetchProperties = async (page) => {
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [modalError, setModalError] = useState(null);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  // Gallery state
+  const [activeImg, setActiveImg] = useState(0);
+  const images = (selectedProperty?.propertyImages ?? [])
+    .map((i) => (typeof i === "string" ? i : i?.url))
+    .filter(Boolean);
+  const mainImg = images[activeImg] ?? "/placeholder.png";
+  const onPrevImg = () =>
+    setActiveImg((i) => (i - 1 + Math.max(images.length, 1)) % Math.max(images.length, 1));
+  const onNextImg = () =>
+    setActiveImg((i) => (i + 1) % Math.max(images.length, 1));
+
+  useEffect(() => {
+    setToken(getTokenTOLocalStorage() ?? null);
+  }, []);
+
+  const fetchProperties = async () => {
     setLoading(true);
     setError(null);
     try {
-      const token = getTokenTOLocalStorage();
-      const params = new URLSearchParams({
-        page: String(page),
-        per_page: String(ITEMS_PER_PAGE),
-      });
-
-      const resp = await fetch(`${URL}/property/?${params.toString()}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-      });
-
-      if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}));
-        throw new Error(err?.message || "Failed to fetch properties");
-      }
-
+      const resp = await fetch(
+        `${URL}/property/?page=${currentPage}&per_page=${ITEMS_PER_PAGE}`,
+        { headers: token ? { Authorization: `Bearer ${token}` } : {} }
+      );
+      if (!resp.ok) throw new Error("Failed to fetch properties");
       const json = await resp.json();
+
       const data = json?.data ?? [];
       const meta = json?.meta_data ?? {};
 
-      setProperties(Array.isArray(data) ? data : []);
-      setTotalPages(meta?.total_page ? Number(meta.total_page) : 1);
-      setTotalEntries(meta?.total ? Number(meta.total) : data.length);
+      setProperties(data);
+      setTotalPages(meta.total_page ?? 1);
+      setTotalEntries(meta.total ?? data.length);
     } catch (e) {
       console.error(e);
-      setError(e?.message || "Failed to fetch properties");
-      setProperties([]);
-      setTotalPages(1);
-      setTotalEntries(0);
+      setError("Failed to fetch properties");
     } finally {
       setLoading(false);
     }
   };
 
-  // fetch on mount & when page changes
   useEffect(() => {
-    fetchProperties(currentPage);
-    if (typeof window !== "undefined") window.scrollTo(0, 0);
+    fetchProperties();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, token]);
 
-  // search submit handler (client-side filter for displayed page)
-  const handleSearch = (values, { setSubmitting }) => {
-    setSearchTerm(values.searchTerm.trim());
-    setSubmitting(false);
-  };
-
-  // client-side filtered list (from the current page payload)
-  const filtered = useMemo(() => {
+  // Client-side search on current page
+  const filteredItems = useMemo(() => {
     if (!searchTerm) return properties;
     const q = searchTerm.toLowerCase();
-    return properties.filter((p) => {
-      const title = String(p?.title ?? "").toLowerCase();
-      const body = String(p?.body ?? "").toLowerCase();
-      const address = String(p?.address ?? "").toLowerCase();
-      return title.includes(q) || body.includes(q) || address.includes(q);
-    });
+    return properties.filter((p) =>
+      `${p?.title ?? ""} ${p?.body ?? ""}`.toLowerCase().includes(q)
+    );
   }, [properties, searchTerm]);
 
-  // pagination helpers
   const paginate = (pageNumber) => {
     const next = Math.min(Math.max(pageNumber, 1), totalPages);
     if (next !== currentPage) {
-      setLoading(true);
       setCurrentPage(next);
+      if (typeof window !== "undefined") window.scrollTo(0, 0);
     }
   };
 
-  // safe helpers
-  const firstImageUrl = (item) =>
-    item?.propertyImages?.[0]?.url || "/placeholder.png";
+  const closeModal = useCallback(() => {
+    setShowModal(false);
+    setSelectedProperty(null);
+    setModalError(null);
+  }, []);
 
-  const landSpace = (item) => {
-    if (item?.land_space == null || item?.land_space === "") return "";
-    return `${item.land_space} SQM`;
+  // Keyboard shortcuts
+  useEffect(() => {
+    const onKey = (e) => {
+      if (!showModal) return;
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft" && images.length > 1) onPrevImg();
+      if (e.key === "ArrowRight" && images.length > 1) onNextImg();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showModal, closeModal, images.length]);
+
+  // Lock body scroll while modal is open (mobile UX)
+  useEffect(() => {
+    if (showModal) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [showModal]);
+
+  const tryShare = async () => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const title = selectedProperty?.title ?? "Property";
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, url });
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        alert("Link copied to clipboard");
+      }
+    } catch {
+      // ignore cancellation
+    }
   };
 
-  const toSlug = (item) => {
-    if (item?.slug) return item.slug;
-    const t = String(item?.title ?? "property");
-    return t.trim().toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const openModalWithProperty = async (fallbackItem) => {
+    setModalError(null);
+    setModalLoading(true);
+    setShowModal(true);
+    setActiveImg(0);
+
+    const slug = fallbackItem?.slug;
+    if (!slug) {
+      setSelectedProperty(fallbackItem);
+      setModalLoading(false);
+      return;
+    }
+
+    try {
+      const resp = await fetch(`${URL}/property/${slug}/`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!resp.ok) {
+        setSelectedProperty(fallbackItem);
+      } else {
+        const detail = await resp.json();
+        const data = detail?.data ?? detail;
+        setSelectedProperty({ ...fallbackItem, ...data });
+      }
+    } catch (e) {
+      console.error(e);
+      setSelectedProperty(fallbackItem);
+      setModalError("Could not load full details.");
+    } finally {
+      setModalLoading(false);
+    }
   };
+
+  const hasBackendData = properties.length > 0;
+  const isSearching = Boolean(searchTerm);
 
   return (
     <div className="bg-gray">
+      {/* Search */}
       <div className="flex items-center justify-center relative">
-        <div className="bg-white w-[80%] lg:w-[50%]  rounded-2xl p-10 md:p-20 lg:p-10 xl:p-16 flex flex-col gap-4 absolute top-[-4rem] md:top-[-13rem] lg:top-[-5rem] xl:top-[-8rem]">
+        <div className="bg-white w-[80%] lg:w-[50%] rounded-2xl p-10 md:p-20 lg:p-10 xl:p-16 flex flex-col gap-4 absolute top-[-4rem] md:top-[-13rem] lg:top-[-5rem] xl:top-[-8rem]">
           <Formik
             initialValues={{ searchTerm: "" }}
             validationSchema={Yup.object({
-              searchTerm: Yup.string().required("Search term is required"),
+              searchTerm: Yup.string().nullable(),
             })}
-            onSubmit={handleSearch}
+            onSubmit={(values, { setSubmitting }) => {
+              setSearchTerm(values.searchTerm || "");
+              setSubmitting(false);
+            }}
           >
             <Form className="flex flex-col gap-3 md:gap-4">
               <p className="text-sm md:text-2xl lg:text-base xl:text-lg ">Search:</p>
@@ -452,7 +230,7 @@ const Projectcomp = () => {
                   type="text"
                   name="searchTerm"
                   placeholder="Search For Property"
-                  className="text-xs md:text-xl lg:text-sm xl:text-base bg-transparent outline-none"
+                  className="text-xs md:text-xl lg:text-sm xl:text-base bg-transparent outline-none w-full"
                 />
               </div>
               <ErrorMessage
@@ -462,7 +240,7 @@ const Projectcomp = () => {
               />
               <button
                 type="submit"
-                className="bg-orange text-white text-xs md:text-2xl lg:text-base xl:text-lg w-[40%] lg:w-[30%]  px-4 py-1 md:py-3 lg:py-2"
+                className="bg-orange text-white text-xs md:text-2xl lg:text-base xl:text-lg w-[40%] lg:w-[30%] px-4 py-1 md:py-3 lg:py-2"
               >
                 Search
               </button>
@@ -471,117 +249,383 @@ const Projectcomp = () => {
         </div>
       </div>
 
-      <div className="bg-gray-200 pt-[11rem] pb-10  px-5 md:px-10 md:pt-[14rem] lg:pt-[14rem] xl:pt-[15rem] lg:px-10 xl:px-12 ">
-        {/* State banners */}
-        {error && (
-          <div className="mb-6 p-3 rounded bg-red-50 text-red-700 text-sm">
-            {error}
-          </div>
-        )}
-        {loading && (
-          <div className="mb-6 p-3 rounded bg-blue-50 text-blue-700 text-sm">
-            Loading properties…
-          </div>
-        )}
-
+      {/* Grid */}
+      <div className="bg-gray-200 pt-[11rem] pb-10 px-5 md:px-10 md:pt-[14rem] lg:pt-[14rem] xl:pt-[15rem] lg:px-10 xl:px-12 ">
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-8 lg:gap-5">
-          {filtered.length === 0 && !loading ? (
+          {loading ? (
+            <div className="col-span-full text-center text-slate-600">Loading…</div>
+          ) : error ? (
+            <div className="col-span-full text-center text-red-600">{error}</div>
+          ) : !hasBackendData ? (
+            // Only show this when the backend actually returned zero items
             <div className="col-span-full text-center text-slate-600">
-              No properties found.
+              No property available
+            </div>
+          ) : filteredItems.length === 0 && isSearching ? (
+            // Distinct message when search filters to no results
+            <div className="col-span-full text-center text-slate-600">
+              No results for your search
             </div>
           ) : (
-            filtered.map((item) => (
-              <div className="hover:shadow-2xl shadow-slate-500" key={item?.id ?? item?.slug}>
-                <div className=" hover:bg-fad flex flex-col gap-2 md:gap-4 px-4 py-4 md:py-6 lg:px-6 lg:py-8 shadow-2xl shadow-slate-400">
-                  <div className="bg-white pb-3 md:pb-6 lg:pb-4 rounded-t-xl">
-                    <div className="h-48 w-full">
-                      <Image
-                        src={firstImageUrl(item)}
-                        alt={String(item?.title || "property")}
-                        className="rounded-t-xl object-cover"
-                        width={800}
-                        height={400}
-                        style={{ width: "100%", height: "100%" }}
-                        unoptimized
-                      />
-                    </div>
+            filteredItems.map((datum) => {
+              const imgSrc =
+                (datum?.propertyImages?.[0] &&
+                  (typeof datum.propertyImages[0] === "string"
+                    ? datum.propertyImages[0]
+                    : datum.propertyImages[0]?.url)) ||
+                "/placeholder.png";
+              const title = datum?.title ?? "Untitled Property";
+              const desc = datum?.body ?? "";
+              const amount = datum?.amount ?? datum?.price ?? null; // support either field
 
-                    <div className="px-5 pt-4 md:px-2 lg:px-5 flex flex-col justify-between items-stretch">
-                      <p className="text-xs md:text-lg lg:text-sm font-medium flex-grow">
-                        {item?.title || "Untitled Property"}
+              return (
+                <div
+                  className="group hover:shadow-2xl shadow-slate-500 bg-white rounded-xl overflow-hidden transition"
+                  key={datum?.slug || title}
+                >
+                  {/* Image */}
+                  <div className="h-48 w-full relative">
+                    <Image
+                      src={imgSrc}
+                      alt={title}
+                      className="object-cover"
+                      fill
+                      unoptimized
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="px-5 pt-4 md:px-4 lg:px-5">
+                    {/* Title + category */}
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm md:text-lg font-medium line-clamp-2">
+                        {title}
                       </p>
-                      <div className="border-gray border-b-[1px] mt-2 md:mt-2 lg:mt-1"></div>
+                      <span className="shrink-0 inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[10px] md:text-xs text-slate-700">
+                        {categoryLabel(datum?.category)}
+                      </span>
                     </div>
 
-                    <div className="px-5 pt-2 md:px-2 lg:px-5 ">
-                      <div className="flex items-stretch ">
-                        <p className=" text-xs md:text-lg lg:text-sm leading-5 font-light flex-grow">
-                          {item?.body || "No description provided."}
-                        </p>
-                      </div>
-                      <div className="border-gray border-b-[1px] mt-2 md:mt-5 lg:mt-2"></div>
-                    </div>
+                    {/* Description */}
+                    <p className="text-xs md:text-sm leading-5 text-slate-600 mt-2 line-clamp-3">
+                      {desc}
+                    </p>
 
-                    <div className="px-5 pt-2 md:px-2 lg:px-5 ">
-                      <div className=" flex items-center justify-between gap-2 md:gap-2 lg:gap-2">
-                        <div className="flex items-center gap-2">
-                          <FaLandmark className="text-orange h-4 w-4 xl:h-5 xl:w-5" />
-                          <p className=" text-xs md:text-lg lg:text-sm  leading-5 font-light">
-                            {landSpace(item)}
+                    <div className="border-gray border-b-[1px] mt-3" />
+                  </div>
+
+                  {/* Footer: Price + Land Space + Button */}
+                  <div className="px-5 pb-4 pt-3 md:px-4 lg:px-5">
+                    <div className="flex items-center gap-3 justify-between">
+                      <div className="flex flex-col">
+                        {amount && (
+                          <p className="text-sm md:text-base font-semibold text-slate-800 truncate">
+                            {formatAmount(amount)}
                           </p>
-                        </div>
+                        )}
+                        {datum?.land_space && (
+                          <p className="text-[11px] md:text-xs text-slate-500">
+                            Land Space: {datum.land_space}
+                          </p>
+                        )}
                       </div>
 
-                      <div className="border-gray border-b-[1px] mt-2 md:mt-5"></div>
-                      <Link
-                        href={`/properties/${toSlug(item)}`}
-                        className="hover:bg-lite"
+                      <button
+                        type="button"
+                        onClick={() => openModalWithProperty(datum)}
+                        className="ml-auto bg-orange text-white rounded-md text-[11px] md:text-sm px-4 py-2 hover:opacity-95 active:opacity-90 transition"
                       >
-                        <div className=" flex items-center justify-between gap-2 md:gap-2 lg:gap-2 pt-3">
-                          <button className="flex justify-center items-center gap-4 border bg-orange text-white text-xs md:text-lg  lg:text-sm px-6 py-2 md:py-2 lg:py-2">
-                            VIEW PROPERTY
-                          </button>
-                        </div>
-                      </Link>
+                        VIEW PROPERTY
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
 
         {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 md:gap-4 pt-10 pb-5 md:pt-16 lg:pt-20 xl:pt-[24rem] cursor-pointer">
+        <div className="flex items-center justify-center gap-2 md:gap-4 pt-10 pb-5 md:pt-16 lg:pt-20 xl:pt-[24rem] cursor-pointer">
+          <div
+            className="p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 rounded-full border"
+            onClick={() => paginate(currentPage - 1)}
+          >
+            <IoIosArrowBack />
+          </div>
+          {[...Array(totalPages)].map((_, index) => (
             <div
-              className="gap-2 p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100"
-              onClick={() => paginate(currentPage - 1)}
+              key={index + 1}
+              className={`p-2 flex justify-center items-center shadow-2xl h-8 w-8 rounded-full border ${
+                currentPage === index + 1 ? "bg-lite text-fad" : "bg-white text-black"
+              }`}
+              onClick={() => paginate(index + 1)}
             >
-              <IoIosArrowBack className="h-5 w-5 md:w-7 md:h-7 lg:h-7 lg:w-7 xl:h-8 xl:w-8" />
+              <p className="text-xs">{index + 1}</p>
+            </div>
+          ))}
+          <div
+            className="p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 rounded-full border"
+            onClick={() => paginate(currentPage + 1)}
+          >
+            <IoIosArrowForward />
+          </div>
+        </div>
+
+        {/* Showing info */}
+        <div className="text-center text-slate-500 text-sm">
+          Showing {Math.min((currentPage - 1) * ITEMS_PER_PAGE + 1, totalEntries)} to{" "}
+          {Math.min(currentPage * ITEMS_PER_PAGE, totalEntries)} of {totalEntries} entries
+        </div>
+      </div>
+
+      {/* Modal: compact on small, split on lg */}
+      {showModal && (
+        <div
+          className="
+            fixed inset-0 z-50 bg-black/50 backdrop-blur-[1px]
+            flex items-center justify-center
+            p-3 lg:p-6
+          "
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeModal();
+          }}
+        >
+          <div
+            className="
+              w-full max-w-md lg:max-w-6xl mt-20
+              bg-white
+              rounded-2xl
+              shadow-2xl
+              overflow-hidden
+              max-h-[85vh] lg:max-h-[85vh]
+              flex flex-col
+            "
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 lg:px-6 py-3 lg:py-4 border-b bg-white/90 backdrop-blur">
+              <div className="min-w-0 pr-2">
+                <h3 className="truncate font-semibold text-base lg:text-lg">
+                  {selectedProperty?.title ?? "Property"}
+                </h3>
+                <p className="text-xs text-slate-500 truncate">
+                  {selectedProperty?.address ?? ""}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={tryShare}
+                  className="px-3 py-2 text-sm rounded-md border hover:bg-slate-50 active:bg-slate-100"
+                  title="Share / Copy link"
+                >
+                  Share
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="h-9 w-9 grid place-items-center rounded-md border hover:bg-slate-50 active:bg-slate-100"
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
 
-            {[...Array(totalPages)].map((_, index) => (
-              <div
-                key={index + 1}
-                className={`gap-2 p-2 flex justify-center items-center shadow-2xl h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100 ${
-                  currentPage === index + 1 ? "bg-lite text-fad " : "bg-white text-black "
-                }`}
-                onClick={() => paginate(index + 1)}
-              >
-                <p className="text-xs md:text-xl lg:text-sm xl:text-base">{index + 1}</p>
-              </div>
-            ))}
+            {/* Content (scrollable) */}
+            <div className="overflow-y-auto">
+              {/* Small screens: stacked; Large: split grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 lg:gap-6">
+                {/* LEFT / TOP: Gallery */}
+                <div className="lg:col-span-3">
+                  <div className="relative w-full h-56 sm:h-64 lg:h-[420px] bg-slate-100">
+                    {modalLoading ? (
+                      <div className="w-full h-full flex items-center justify-center text-slate-600">
+                        Loading…
+                      </div>
+                    ) : (
+                      <Image
+                        src={mainImg}
+                        alt={selectedProperty?.title ?? "property"}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    )}
 
-            <div
-              className="gap-2 p-2 flex justify-center items-center shadow-2xl bg-white text-black h-8 w-8 md:h-14 md:w-14 lg:h-9 lg:w-9 xl:h-10 xl:w-10 rounded-full border border-slate-100"
-              onClick={() => paginate(currentPage + 1)}
-            >
-              <IoIosArrowForward className="h-5 w-5 md:w-7 md:h-7 lg:h-7 lg:w-7 xl:h-8 xl:w-8" />
+                    {/* Arrows (hide if <2 images) */}
+                    {!modalLoading && images.length > 1 && (
+                      <>
+                        <button
+                          onClick={onPrevImg}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 hover:bg-white shadow grid place-items-center"
+                          aria-label="Previous image"
+                        >
+                          ‹
+                        </button>
+                        <button
+                          onClick={onNextImg}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 hover:bg-white shadow grid place-items-center"
+                          aria-label="Next image"
+                        >
+                          ›
+                        </button>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Thumbnails (compact on small) */}
+                  {!modalLoading && images.length > 1 && (
+                    <div className="flex gap-2 p-3 overflow-x-auto border-t">
+                      {images.map((src, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveImg(idx)}
+                          className={`relative h-14 w-20 shrink-0 rounded overflow-hidden border ${
+                            idx === activeImg
+                              ? "ring-2 ring-lite border-transparent"
+                              : "hover:opacity-90"
+                          }`}
+                          aria-label={`Image ${idx + 1}`}
+                        >
+                          <Image
+                            src={src}
+                            alt={`thumb-${idx}`}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* RIGHT / BOTTOM: Details */}
+                <div className="lg:col-span-2 p-4 lg:p-6 space-y-5">
+                  {/* Price + badges */}
+                  <div className="space-y-2">
+                    <p className="text-lg sm:text-xl lg:text-2xl font-semibold">
+                      {formatAmount(
+                        selectedProperty?.amount ?? selectedProperty?.price ?? "—"
+                      )}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProperty?.category !== undefined && (
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">
+                          {categoryLabel(selectedProperty?.category)}
+                        </span>
+                      )}
+                      {selectedProperty?.status && (
+                        <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-2.5 py-0.5 text-xs font-medium">
+                          {selectedProperty.status}
+                        </span>
+                      )}
+                      {selectedProperty?.land_space && (
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">
+                          Land Space: {selectedProperty.land_space}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Facts grid (compact) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    {selectedProperty?.address && (
+                      <div className="rounded-lg border p-3">
+                        <p className="text-slate-500">Address</p>
+                        <p className="font-medium">{selectedProperty.address}</p>
+                      </div>
+                    )}
+                    {typeof selectedProperty?.land_space !== "undefined" && (
+                      <div className="rounded-lg border p-3">
+                        <p className="text-slate-500">Land Space</p>
+                        <p className="font-medium">{selectedProperty.land_space}</p>
+                      </div>
+                    )}
+                    {selectedProperty?.bedrooms && (
+                      <div className="rounded-lg border p-3">
+                        <p className="text-slate-500">Bedrooms</p>
+                        <p className="font-medium">{selectedProperty.bedrooms}</p>
+                      </div>
+                    )}
+                    {selectedProperty?.bathrooms && (
+                      <div className="rounded-lg border p-3">
+                        <p className="text-slate-500">Bathrooms</p>
+                        <p className="font-medium">{selectedProperty.bathrooms}</p>
+                      </div>
+                    )}
+                    {selectedProperty?.sqr || selectedProperty?.area ? (
+                      <div className="rounded-lg border p-3">
+                        <p className="text-slate-500">Area</p>
+                        <p className="font-medium">
+                          {selectedProperty.sqr ?? selectedProperty.area}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {/* Description (compact) */}
+                  <div className="space-y-2">
+                    <p className="text-slate-500 text-sm">Description</p>
+                    <div className="rounded-xl border p-4 text-sm leading-6 text-slate-700 whitespace-pre-line">
+                      {modalLoading
+                        ? "Loading description…"
+                        : selectedProperty?.body ?? "No description provided."}
+                    </div>
+                    {modalError && (
+                      <div className="text-xs text-red-600">{modalError}</div>
+                    )}
+                  </div>
+
+                  {/* Quick actions (inline, compact) */}
+                  <div className="flex justify-end gap-2 pt-1">
+                    <button
+                      onClick={async () => {
+                        const url =
+                          typeof window !== "undefined" ? window.location.href : "";
+                        try {
+                          if (navigator.clipboard) {
+                            await navigator.clipboard.writeText(url);
+                            alert("Link copied to clipboard");
+                          }
+                        } catch {}
+                      }}
+                      className="px-3 py-2 text-sm rounded-md border hover:bg-slate-50"
+                    >
+                      Copy link
+                    </button>
+                    <button
+                      className="px-3 py-2 text-sm rounded-md bg-orange text-white hover:opacity-90"
+                      onClick={() => {
+                        const phone = "2347060679005"; // agent/business number
+                        const message = `Hello, I'm interested in the property: ${
+                          selectedProperty?.title ?? "Property"
+                        } located at ${selectedProperty?.address ?? ""}. Could you give me more details?`;
+                        const url = `https://wa.me/${phone}?text=${encodeURIComponent(
+                          message
+                        )}`;
+                        window.open(url, "_blank");
+                      }}
+                    >
+                      Contact Agent
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="px-4 lg:px-6 py-3 border-t bg-white flex justify-end">
+              <button
+                className="px-4 py-2 rounded-md border hover:bg-slate-50 text-sm"
+                onClick={closeModal}
+              >
+                Close
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

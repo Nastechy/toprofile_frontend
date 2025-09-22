@@ -75,10 +75,8 @@ const SignupComp = () => {
       <div className="flex-1">
         <Image
           src={Bgg}
-          className="h-[70vh] lg:h-screen w-full"
+          className="h-screen w-full"
           alt="bgg-img"
-          width={10}
-          height={10}
         />
       </div>
       <div className="flex-1 bg-white flex items-center justify-center py-10">
@@ -88,8 +86,8 @@ const SignupComp = () => {
               src={bg}
               className="w-[30%] md:w-[50%] lg:w-[30%]"
               alt="bg-img"
-              width={10}
-              height={10}
+              // width={10}
+              // height={10}
             />
           </div>
           <div>
