@@ -1,6 +1,10 @@
 import Footer from "@/components/websites/Footer/footer";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { CookieConsentProvider } from "@/components/cookies/CookieConsent";
+import AnalyticsScripts from "@/components/cookies/AnalyticsScripts";
+import CookieSettingsModal from "@/components/cookies/CookieSettingsModal";
+import CookieBanner from "@/components/cookies/CookieBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +21,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body >
+        <CookieConsentProvider>
+          {children}
+          <Footer />
+          <AnalyticsScripts />
+          <CookieBanner />
+          <CookieSettingsModal />
+        </CookieConsentProvider>
+      </body>
+      {/* <body className={inter.className}>
         {children}
         <Footer />
-      </body>
+      </body> */}
     </html>
   );
 }
