@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
-    domains: ["media.jaswillproperties.cloud"], // Add your domain here
+    domains: ["media.jaswillproperties.cloud"], 
   },
 };
 

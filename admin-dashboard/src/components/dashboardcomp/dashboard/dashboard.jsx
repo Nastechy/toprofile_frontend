@@ -74,7 +74,7 @@ const Dashboard = () => {
 
   const cat = dashboardData?.article || [];
 
-  console.log(cat, "fuck you");
+  // console.log(cat, "fuck you");
 
   const calculateDeviceUsage = () => {
     const webUsers = 80; // Example data, replace with real data if available
