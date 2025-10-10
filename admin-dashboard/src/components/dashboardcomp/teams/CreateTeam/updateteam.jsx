@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { MdOutlineCancelPresentation } from 'react-icons/md';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Link from 'next/link';
 import { URL } from '@/components/utils/client';
 
 // Define the image conversion function
@@ -17,7 +16,7 @@ const convertToBase64 = (file) => {
 };
 
 const UpdateTeam = ({ handleCloseModal }) => {
-  const [showForm, setShowForm] = useState(true); // State to control form visibility
+  const [, setShowForm] = useState(true); // State to control form visibility
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log('Form Submitted:', values);

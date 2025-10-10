@@ -1,22 +1,15 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import { IoMdCheckmark } from "react-icons/io";
-import kam from "../../../../public/img/man.png";
-import Link from "next/link";
-import Image from "next/image";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaRegDotCircle } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
-import { IoMdEye } from "react-icons/io";
-import { MdDeleteOutline } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import axios from "axios";
-import CreateService from "./createService/createservice";
-import UpdateService from "./updateService/updateservice";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import Image from 'next/image';
+import { MdDeleteOutline } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi';
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
+import axios from 'axios';
+import CreateService from './createService/createservice';
+import UpdateService from './updateService/updateservice';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const Service = () => {
   const [showModal, setShowModal] = useState(false);
@@ -49,12 +42,10 @@ const Service = () => {
 
   const fetchService = async () => {
     try {
-      const response = await axios.get(
-        `${URL}/our_service/`
-      );
+      const response = await axios.get(`${URL}/our_service/`);
       setService(response.data.data);
     } catch (err) {
-      setError("Failed to fetch service");
+      setError('Failed to fetch service');
       console.error(err);
     }
   };
@@ -63,28 +54,25 @@ const Service = () => {
   }, [currentPage]);
   const handleDeleteService = async (id) => {
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
     try {
-      const response = await fetch(
-        `${URL}/our_service/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/our_service/${id}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to delete the blog");
+        throw new Error('Failed to delete the blog');
       }
 
       fetchService();
     } catch (error) {
-      console.error("Error deleting blog:", error);
+      console.error('Error deleting blog:', error);
       setError(error.message);
     }
   };
@@ -126,8 +114,8 @@ const Service = () => {
                     <td className="px-4 py-3">
                       <div className="flex items-center">
                         <Image
-                          src={datum.image || "/placeholder.png"}
-                          alt={datum.title || "service"}
+                          src={datum.image || '/placeholder.png'}
+                          alt={datum.title || 'service'}
                           width={60}
                           height={60}
                           className="w-[60px] h-[60px] object-cover rounded"
@@ -141,9 +129,7 @@ const Service = () => {
                     </td>
 
                     <td className="px-4 py-3">
-                      <p className="text-xs">
-                        {truncateDescription(datum.content, 80)}
-                      </p>
+                      <p className="text-xs">{truncateDescription(datum.content, 80)}</p>
                     </td>
 
                     <td className="px-4 py-3">
@@ -180,20 +166,18 @@ const Service = () => {
         </div>
       </div>
 
-
       <div className="flex justify-between items-center px-5 pt-[300px] pb-10 ">
         <div>
           <p className="text-sm text-slate-500">
-            Showing{" "}
-            {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{" "}
-            {Math.min(currentPage * itemsPerPage, totalEntries)} of{" "}
-            {totalEntries} entries
+            Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{' '}
+            {Math.min(currentPage * itemsPerPage, totalEntries)} of {totalEntries} entries
           </p>
         </div>
         <div className="flex items-center gap-3 justify-center text-slate-500 text-sm">
           <div
-            className={`flex items-center gap-1 rounded-md border border-slate-300 p-2 ${currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+            className={`flex items-center gap-1 rounded-md border border-slate-300 p-2 ${
+              currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
             onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
           >
             <IoIosArrowRoundBack className="h-6 w-6" />
@@ -203,10 +187,9 @@ const Service = () => {
           {[...Array(totalPages)].map((_, index) => (
             <div
               key={index}
-              className={`border border-slate-300 px-4 py-2 ${currentPage === index + 1
-                ? "bg-lite text-white"
-                : "hover:bg-lite hover:text-white"
-                } cursor-pointer`}
+              className={`border border-slate-300 px-4 py-2 ${
+                currentPage === index + 1 ? 'bg-lite text-white' : 'hover:bg-lite hover:text-white'
+              } cursor-pointer`}
               onClick={() => setCurrentPage(index + 1)}
             >
               <p className="text-sm">{index + 1}</p>
@@ -214,13 +197,10 @@ const Service = () => {
           ))}
 
           <div
-            className={`flex items-center gap-1 rounded-md border border-slate-300 p-2 ${currentPage === totalPages
-              ? "cursor-not-allowed"
-              : "cursor-pointer"
-              }`}
-            onClick={() =>
-              currentPage < totalPages && setCurrentPage(currentPage + 1)
-            }
+            className={`flex items-center gap-1 rounded-md border border-slate-300 p-2 ${
+              currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
           >
             <p className="text-sm">Next</p>
             <IoIosArrowRoundForward className="h-6 w-6" />
@@ -232,10 +212,7 @@ const Service = () => {
         <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="relative w-[70%] top-6 left-[8rem] xl:left-[9rem] xl:top-[1.5rem] h-[80vh] bg-white  shadow-2xl rounded-lg overflow-y-auto">
             {/* Your modal content goes here */}
-            <CreateService
-              fetchService={fetchService}
-              handleCloseModal={handleCloseModal}
-            />{" "}
+            <CreateService fetchService={fetchService} handleCloseModal={handleCloseModal} />{' '}
             {/* This assumes your modal content is in the Notifications component */}
           </div>
         </div>

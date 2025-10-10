@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { MdOutlineCancelPresentation, MdDeleteOutline } from "react-icons/md";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+import React, { useState, useEffect } from 'react';
+import { MdOutlineCancelPresentation, MdDeleteOutline } from 'react-icons/md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const CreatePropertyCategory = ({ handleCloseModal }) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [categories, setCategories] = useState([]);
 
   // Fetch all categories
   const getCategories = async () => {
     const token = getTokenTOLocalStorage();
     if (!token) {
-      setMessage("No token found. Please log in.");
+      setMessage('No token found. Please log in.');
       return;
     }
     try {
       const response = await fetch(`${URL}/property/listing/category/`, {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
-      if (!response.ok) throw new Error("Failed to fetch categories");
+      if (!response.ok) throw new Error('Failed to fetch categories');
       const data = await response.json();
       setCategories(data?.data ?? []);
-      setMessage("");
+      setMessage('');
     } catch (error) {
-      console.error("Error fetching categories:", error);
-      setMessage("Failed to fetch categories.");
+      console.error('Error fetching categories:', error);
+      setMessage('Failed to fetch categories.');
     }
   };
 
@@ -45,7 +45,7 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = getTokenTOLocalStorage();
     if (!token) {
-      setMessage("No token found. Please log in.");
+      setMessage('No token found. Please log in.');
       return;
     }
 
@@ -53,21 +53,21 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
     try {
       const payload = { name: values.name };
       const response = await fetch(`${URL}/property/listing/category/`, {
-        method: "POST",
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Failed to create category.");
-      setMessage("Category created successfully!");
+      if (!response.ok) throw new Error('Failed to create category.');
+      setMessage('Category created successfully!');
       resetForm();
       await getCategories(); // refresh table
     } catch (error) {
       console.error(error);
-      setMessage("An error occurred while creating the category.");
+      setMessage('An error occurred while creating the category.');
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -75,33 +75,30 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
   };
 
   const handleDelete = async (categoryId) => {
-    if (!confirm("Delete this category?")) return;
+    if (!confirm('Delete this category?')) return;
 
     const token = getTokenTOLocalStorage();
     if (!token) {
-      setMessage("No token found. Please log in.");
+      setMessage('No token found. Please log in.');
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch(
-        `${URL}/property/listing/category/${categoryId}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/property/listing/category/${categoryId}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
-      if (!response.ok) throw new Error("Failed to delete category.");
-      setMessage("Category deleted successfully!");
+      if (!response.ok) throw new Error('Failed to delete category.');
+      setMessage('Category deleted successfully!');
       await getCategories(); // refresh table
     } catch (error) {
       console.error(error);
-      setMessage("An error occurred while deleting the category.");
+      setMessage('An error occurred while deleting the category.');
     } finally {
       setLoading(false);
     }
@@ -123,17 +120,12 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
 
       {/* Status */}
       <div className="px-6 sm:px-8 md:px-10 lg:px-12">
-        {loading && (
-          <div className="text-[#EC7937] mb-3 text-sm">
-            Processing, please wait…
-          </div>
-        )}
+        {loading && <div className="text-[#EC7937] mb-3 text-sm">Processing, please wait…</div>}
         {message && (
           <div
-            className={`mb-3 text-sm ${message.toLowerCase().includes("success")
-                ? "text-green-600"
-                : "text-red-600"
-              }`}
+            className={`mb-3 text-sm ${
+              message.toLowerCase().includes('success') ? 'text-green-600' : 'text-red-600'
+            }`}
           >
             {message}
           </div>
@@ -143,12 +135,12 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
       {/* Form */}
       <div className="px-6 sm:px-8 md:px-10 lg:px-12 pb-6">
         <Formik
-          initialValues={{ name: "" }}
+          initialValues={{ name: '' }}
           validationSchema={Yup.object({
             name: Yup.string()
-              .required("Name is required")
-              .min(1, "Name must be at least 1 character long")
-              .max(225, "Name must be at most 225 characters long"),
+              .required('Name is required')
+              .min(1, 'Name must be at least 1 character long')
+              .max(225, 'Name must be at most 225 characters long'),
           })}
           onSubmit={handleSubmit}
         >
@@ -165,11 +157,7 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
                   placeholder="Enter new category name"
                   className="outline-none text-[10px] italic border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                 />
-                <ErrorMessage
-                  name="name"
-                  component="div"
-                  className="text-red-500 text-xs"
-                />
+                <ErrorMessage name="name" component="div" className="text-red-500 text-xs" />
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-2">
@@ -185,7 +173,7 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
                   disabled={isSubmitting || loading}
                   className="bg-lite text-sm text-white px-4 py-2 rounded hover:opacity-90 disabled:opacity-60"
                 >
-                  {isSubmitting || loading ? "Saving…" : "Save"}
+                  {isSubmitting || loading ? 'Saving…' : 'Save'}
                 </button>
               </div>
             </Form>
@@ -207,16 +195,9 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
             <tbody>
               {categories && categories.length > 0 ? (
                 categories.map((category, idx) => (
-                  <tr
-                    key={category.id ?? `${category.name}-${idx}`}
-                    className="border-t"
-                  >
-                    <td className="px-4 py-3">
-                      {idx + 1}
-                    </td>
-                    <td className="px-4 py-3">
-                      {category.name}
-                    </td>
+                  <tr key={category.id ?? `${category.name}-${idx}`} className="border-t">
+                    <td className="px-4 py-3">{idx + 1}</td>
+                    <td className="px-4 py-3">{category.name}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-center">
                         <button
@@ -233,10 +214,7 @@ const CreatePropertyCategory = ({ handleCloseModal }) => {
                 ))
               ) : (
                 <tr>
-                  <td
-                    colSpan={3}
-                    className="px-4 py-6 text-center text-slate-500"
-                  >
+                  <td colSpan={3} className="px-4 py-6 text-center text-slate-500">
                     No categories found.
                   </td>
                 </tr>

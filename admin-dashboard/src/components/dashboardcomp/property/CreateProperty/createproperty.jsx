@@ -1,20 +1,16 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { MdOutlineCancelPresentation } from "react-icons/md";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+import React, { useState, useEffect } from 'react';
+import { MdOutlineCancelPresentation } from 'react-icons/md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
-const CreateProperty = ({
-  handleCloseModal,
-  existingPropertyData = {},
-  fetchProperties,
-}) => {
+const CreateProperty = ({ handleCloseModal, existingPropertyData = {}, fetchProperties }) => {
   const [showForm, setShowForm] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -23,17 +19,17 @@ const CreateProperty = ({
     if (!token) return;
     try {
       const res = await fetch(`${URL}/property/listing/category/`, {
-        method: "GET",
+        method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
         const data = await res.json();
         setCategories(data?.data ?? []);
       } else {
-        setMessage("Failed to fetch categories");
+        setMessage('Failed to fetch categories');
       }
     } catch (e) {
-      setMessage("An error occurred while fetching categories.");
+      setMessage('An error occurred while fetching categories.');
     }
   };
 
@@ -44,24 +40,21 @@ const CreateProperty = ({
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = getTokenTOLocalStorage();
     if (!token) {
-      setMessage("No token found. Please log in.");
+      setMessage('No token found. Please log in.');
       return;
     }
     setLoading(true);
-    setMessage("");
+    setMessage('');
     try {
       const fd = new FormData();
-      fd.append("title", values.title);
-      fd.append("body", values.body);
-      fd.append("address", values.address);
-      fd.append("land_space", values.land_space);
-      fd.append("amount", values.amount);
-      fd.append(
-        "category",
-        String(selectedCategoryId ?? values.category ?? "")
-      );
+      fd.append('title', values.title);
+      fd.append('body', values.body);
+      fd.append('address', values.address);
+      fd.append('land_space', values.land_space);
+      fd.append('amount', values.amount);
+      fd.append('category', String(selectedCategoryId ?? values.category ?? ''));
 
-      const imageFields = ["image1", "image2", "image3", "image4", "image5"];
+      const imageFields = ['image1', 'image2', 'image3', 'image4', 'image5'];
       let i = 0;
       for (const key of imageFields) {
         const file = values[key];
@@ -72,7 +65,7 @@ const CreateProperty = ({
       }
 
       const res = await fetch(`${URL}/property/`, {
-        method: "POST",
+        method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd,
       });
@@ -81,16 +74,14 @@ const CreateProperty = ({
         fetchProperties?.();
         resetForm();
         setShowForm(false);
-        setMessage("Property submitted successfully!");
+        setMessage('Property submitted successfully!');
         handleCloseModal?.();
       } else {
         const err = await res.json().catch(() => ({}));
-        setMessage(
-          err?.message || "Failed to submit property. Please try again."
-        );
+        setMessage(err?.message || 'Failed to submit property. Please try again.');
       }
     } catch (e) {
-      setMessage("An error occurred while submitting the property.");
+      setMessage('An error occurred while submitting the property.');
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -100,25 +91,18 @@ const CreateProperty = ({
   return (
     <div>
       <div className="flex items-center justify-end px-20 pt-10 pb-5 cursor-pointer">
-        <MdOutlineCancelPresentation
-          className="h-6 w-6"
-          onClick={handleCloseModal}
-        />
+        <MdOutlineCancelPresentation className="h-6 w-6" onClick={handleCloseModal} />
       </div>
 
       <div className="px-20 py-10">
         {loading && (
-          <div className="text-blue-500 text-center mb-4">
-            Creating property, please wait...
-          </div>
+          <div className="text-blue-500 text-center mb-4">Creating property, please wait...</div>
         )}
 
         {message && (
           <div
             className={`text-center mb-4 ${
-              message.toLowerCase().includes("success")
-                ? "text-green-500"
-                : "text-red-500"
+              message.toLowerCase().includes('success') ? 'text-green-500' : 'text-red-500'
             }`}
           >
             {message}
@@ -128,12 +112,12 @@ const CreateProperty = ({
         {showForm && (
           <Formik
             initialValues={{
-              title: existingPropertyData.title || "",
-              body: existingPropertyData.body || "",
-              address: existingPropertyData.address || "",
-              land_space: existingPropertyData.land_space || "",
-              amount: existingPropertyData.amount || "",
-              category: "",
+              title: existingPropertyData.title || '',
+              body: existingPropertyData.body || '',
+              address: existingPropertyData.address || '',
+              land_space: existingPropertyData.land_space || '',
+              amount: existingPropertyData.amount || '',
+              category: '',
               image1: null,
               image2: null,
               image3: null,
@@ -141,19 +125,17 @@ const CreateProperty = ({
               image5: null,
             }}
             validationSchema={Yup.object({
-              title: Yup.string().required("Title is required"),
-              body: Yup.string().required("Description is required"),
-              address: Yup.string().required("Address is required"),
+              title: Yup.string().required('Title is required'),
+              body: Yup.string().required('Description is required'),
+              address: Yup.string().required('Address is required'),
               land_space: Yup.number()
-                .typeError("Must be a number")
-                .required("Land space is required"),
-              amount: Yup.number()
-                .typeError("Must be a number")
-                .required("Amount is required"),
-              image1: Yup.mixed().required("At least one image is required"),
+                .typeError('Must be a number')
+                .required('Land space is required'),
+              amount: Yup.number().typeError('Must be a number').required('Amount is required'),
+              image1: Yup.mixed().required('At least one image is required'),
               category: Yup.number()
-                .typeError("Category is required")
-                .required("Category is required"),
+                .typeError('Category is required')
+                .required('Category is required'),
             })}
             onSubmit={handleSubmit}
           >
@@ -169,11 +151,7 @@ const CreateProperty = ({
                     placeholder="Enter property title"
                     className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                   />
-                  <ErrorMessage
-                    name="title"
-                    component="div"
-                    className="text-red-500 text-xs"
-                  />
+                  <ErrorMessage name="title" component="div" className="text-red-500 text-xs" />
                 </div>
 
                 <div className="flex items-center justify-between gap-6">
@@ -187,11 +165,7 @@ const CreateProperty = ({
                       placeholder="Enter property address"
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                     />
-                    <ErrorMessage
-                      name="address"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
+                    <ErrorMessage name="address" component="div" className="text-red-500 text-xs" />
                   </div>
 
                   <div className="flex flex-col gap-2 w-[45%]">
@@ -205,7 +179,7 @@ const CreateProperty = ({
                       onChange={(e) => {
                         const id = Number(e.target.value);
                         setSelectedCategoryId(id);
-                        setFieldValue("category", id);
+                        setFieldValue('category', id);
                       }}
                     >
                       <option value="">Select Category</option>
@@ -250,11 +224,7 @@ const CreateProperty = ({
                       placeholder="Enter property amount"
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                     />
-                    <ErrorMessage
-                      name="amount"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
+                    <ErrorMessage name="amount" component="div" className="text-red-500 text-xs" />
                   </div>
                 </div>
 
@@ -268,11 +238,7 @@ const CreateProperty = ({
                     placeholder="Enter property description"
                     className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                   />
-                  <ErrorMessage
-                    name="body"
-                    component="div"
-                    className="text-red-500 text-xs"
-                  />
+                  <ErrorMessage name="body" component="div" className="text-red-500 text-xs" />
                 </div>
 
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -285,10 +251,7 @@ const CreateProperty = ({
                       accept="image/*"
                       name={`image${i}`}
                       onChange={(e) =>
-                        setFieldValue(
-                          `image${i}`,
-                          e.currentTarget.files?.[0] || null
-                        )
+                        setFieldValue(`image${i}`, e.currentTarget.files?.[0] || null)
                       }
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                     />

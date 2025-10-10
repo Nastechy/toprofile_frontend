@@ -1,4 +1,4 @@
-import React, from 'react';
+import React from 'react';
 import { BiMessageSquareCheck } from 'react-icons/bi';
 import Link from 'next/link';
 import styles from './sidebar.module.css';

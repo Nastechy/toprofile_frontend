@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import Image from "next/image";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi';
+import { MdDeleteOutline } from 'react-icons/md';
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
+import Image from 'next/image';
+import axios from 'axios';
 
-import CreateProperty from "./CreateProperty/createproperty";
-import UpdateProperty from "./updateProperty/updateproperty";
-import CreatePropertyCategory from "./Category/createPropertyCategory";
+import CreateProperty from './CreateProperty/createproperty';
+import UpdateProperty from './updateProperty/updateproperty';
+import CreatePropertyCategory from './Category/createPropertyCategory';
 
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const itemsPerPage = 10;
 
@@ -21,7 +21,7 @@ function truncate(description, maxLength) {
   if (description && description.length > maxLength) {
     return `${description.substring(0, maxLength)}...`;
   }
-  return description ?? "";
+  return description ?? '';
 }
 
 export default function Property() {
@@ -60,7 +60,7 @@ export default function Property() {
       setTotalEntries(meta.total ?? 0);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch properties");
+      setError('Failed to fetch properties');
     } finally {
       setLoading(false);
     }
@@ -77,21 +77,21 @@ export default function Property() {
 
   const handleDeleteProperty = async (propertySlug) => {
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
     try {
       const resp = await fetch(`${URL}/property/${propertySlug}/`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
-      if (!resp.ok) throw new Error("Failed to delete the property");
+      if (!resp.ok) throw new Error('Failed to delete the property');
       fetchProperties();
     } catch (e) {
-      console.error("Error deleting property:", e);
+      console.error('Error deleting property:', e);
       setError(e.message);
     }
   };
@@ -142,15 +142,10 @@ export default function Property() {
                 </tr>
               ) : properties.length > 0 ? (
                 properties.map((datum, idx) => {
-                  const imgSrc = datum?.propertyImages?.[0]?.url || "/placeholder.png";
+                  const imgSrc = datum?.propertyImages?.[0]?.url || '/placeholder.png';
                   return (
-                    <tr
-                      key={datum?.id ?? datum?.slug ?? idx}
-                      className="border-t"
-                    >
-                      <td className="px-4 py-3">
-                        {(currentPage - 1) * itemsPerPage + idx + 1}
-                      </td>
+                    <tr key={datum?.id ?? datum?.slug ?? idx} className="border-t">
+                      <td className="px-4 py-3">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
 
                       <td className="px-4 py-3">
                         <div className="flex items-center">
@@ -199,7 +194,7 @@ export default function Property() {
               ) : (
                 <tr>
                   <td colSpan={5} className="px-4 py-6 text-center text-slate-500">
-                    {error ?? "No property available"}
+                    {error ?? 'No property available'}
                   </td>
                 </tr>
               )}
@@ -208,22 +203,20 @@ export default function Property() {
         </div>
       </div>
 
-
       {/* Pagination */}
       <div className="flex justify-between items-center px-5 pt-[300px] pb-10">
         <div>
           <p className="text-sm text-slate-500">
-            Showing{" "}
-            {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{" "}
-            {Math.min(currentPage * itemsPerPage, totalEntries)} of{" "}
-            {totalEntries} entries
+            Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{' '}
+            {Math.min(currentPage * itemsPerPage, totalEntries)} of {totalEntries} entries
           </p>
         </div>
 
         <div className="flex items-center justify-center gap-3 text-slate-500 text-sm">
           <div
-            className={`flex items-center font-medium gap-1 rounded-md border border-slate-300 p-2 ${currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+            className={`flex items-center font-medium gap-1 rounded-md border border-slate-300 p-2 ${
+              currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
             onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
           >
             <IoIosArrowRoundBack className="h-4 w-4" />
@@ -233,10 +226,9 @@ export default function Property() {
           {[...Array(totalPages)].map((_, index) => (
             <div
               key={index}
-              className={`border border-slate-300 px-4 py-2 ${currentPage === index + 1
-                ? "bg-lite text-white"
-                : "hover:bg-lite hover:text-white"
-                } cursor-pointer`}
+              className={`border border-slate-300 px-4 py-2 ${
+                currentPage === index + 1 ? 'bg-lite text-white' : 'hover:bg-lite hover:text-white'
+              } cursor-pointer`}
               onClick={() => setCurrentPage(index + 1)}
             >
               <p className="text-sm">{index + 1}</p>
@@ -244,11 +236,10 @@ export default function Property() {
           ))}
 
           <div
-            className={`flex items-center gap-1 font-medium border rounded-md border-slate-300 p-2 ${currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
-            onClick={() =>
-              currentPage < totalPages && setCurrentPage(currentPage + 1)
-            }
+            className={`flex items-center gap-1 font-medium border rounded-md border-slate-300 p-2 ${
+              currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
           >
             <p className="text-sm">Next</p>
             <IoIosArrowRoundForward className="h-4 w-4" />
@@ -260,10 +251,7 @@ export default function Property() {
       {showModal && (
         <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="relative w-[70%] top-6 left-[8rem] xl:left-[9rem] xl:top-[1.5rem] h-[80vh] bg-white shadow-2xl rounded-lg overflow-y-auto">
-            <CreateProperty
-              fetchProperties={fetchProperties}
-              handleCloseModal={handleCloseModal}
-            />
+            <CreateProperty fetchProperties={fetchProperties} handleCloseModal={handleCloseModal} />
           </div>
         </div>
       )}

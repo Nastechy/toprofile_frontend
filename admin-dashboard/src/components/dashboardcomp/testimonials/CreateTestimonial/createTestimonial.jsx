@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { MdOutlineCancelPresentation } from "react-icons/md";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+import React, { useState } from 'react';
+import { MdOutlineCancelPresentation } from 'react-icons/md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
     const token = getTokenTOLocalStorage();
 
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
 
@@ -38,20 +38,17 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
         comment: values.comment,
         image: base64Image, // Ensure this is an array
       };
-      console.log("payload>>>", payload);
+      console.log('payload>>>', payload);
       // Make a POST request to the API
-      const response = await fetch(
-        `${URL}/testimony/`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`, // Use the token
-            "Content-Type": "application/json", // Ensure the content type is set correctly
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-      console.log("res>>>", response);
+      const response = await fetch(`${URL}/testimony/`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`, // Use the token
+          'Content-Type': 'application/json', // Ensure the content type is set correctly
+        },
+        body: JSON.stringify(payload),
+      });
+      console.log('res>>>', response);
 
       if (response.ok) {
         fetchTestimonials();
@@ -59,12 +56,12 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
         resetForm();
         setShowForm(false);
         handleCloseModal(); // Optionally hide the form
-        console.log("Testimonial created successfully!");
+        console.log('Testimonial created successfully!');
       } else {
-        console.error("Failed to create Testimonial:", response.statusText);
+        console.error('Failed to create Testimonial:', response.statusText);
       }
     } catch (error) {
-      console.error("Error creating Testimonial:", error);
+      console.error('Error creating Testimonial:', error);
     } finally {
       setSubmitting(false);
     }
@@ -73,10 +70,7 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
   return (
     <div>
       <div className="flex items-center justify-end px-20 pt-10 pb-5 ">
-        <MdOutlineCancelPresentation
-          className="h-6 w-6"
-          onClick={handleCloseModal}
-        />
+        <MdOutlineCancelPresentation className="h-6 w-6" onClick={handleCloseModal} />
       </div>
 
       <div className="px-20 py-10  ">
@@ -84,15 +78,15 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
           <div className="">
             <Formik
               initialValues={{
-                name: "",
-                comment: "",
+                name: '',
+                comment: '',
                 file: null,
               }}
               validationSchema={Yup.object({
                 // Validation schema
-                name: Yup.string().required("Field cannot be empty"),
-                comment: Yup.string().required("Field cannot be empty"),
-                file: Yup.mixed().required("File is required"),
+                name: Yup.string().required('Field cannot be empty'),
+                comment: Yup.string().required('Field cannot be empty'),
+                file: Yup.mixed().required('File is required'),
               })}
               onSubmit={handleSubmit}
             >
@@ -117,7 +111,7 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
                     </div>
                     <div className="flex flex-col gap-2 w-[40%] xl:w-[45%] text-sm ">
                       <label htmlFor="file" className="text-sm ">
-                        {" "}
+                        {' '}
                         Image
                       </label>
                       <input
@@ -125,7 +119,7 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
                         name="file"
                         className="outline-none border text-black border-slate-200  bg-transparent rounded px-4 py-2 text-sm focus-visible:bg-white focus-visible:text-blu focus-visible:border-slate-400 "
                         onChange={(event) => {
-                          setFieldValue("file", event.currentTarget.files[0]);
+                          setFieldValue('file', event.currentTarget.files[0]);
                         }}
                         multiple
                       />
@@ -148,11 +142,7 @@ const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
                       placeholder="Write a message"
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm focus-visible:bg-white focus-visible:text-blu focus-visible:border-slate-400"
                     />
-                    <ErrorMessage
-                      name="text"
-                      component="div"
-                      className="text-red-500 text-sm"
-                    />
+                    <ErrorMessage name="text" component="div" className="text-red-500 text-sm" />
                   </div>
 
                   <div className="flex items-center justify-center pt-16">

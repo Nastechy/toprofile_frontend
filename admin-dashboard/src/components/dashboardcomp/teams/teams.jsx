@@ -12,20 +12,12 @@ import { URL } from '@/components/utils/client';
 const Teams = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const [showTeamModal, setShowTeamModal] = useState(false);
+  const [, setShowTeamModal] = useState(false);
   const [team, setTeam] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setLoading] = useState(true);
+  const [, setError] = useState(null);
   const token = getTokenTOLocalStorage();
-  const [selectedTeam, setSelectedTeam] = useState(null);
-  const formatDate = (dateString) => {
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString(); // Format as "MM/DD/YYYY" or use other formats as needed
-    } catch (error) {
-      return 'Invalid date'; // Return a default value if there's an error
-    }
-  };
+  const [, setSelectedTeam] = useState(null);
   if (!token) {
     console.error('No token found, please log in');
     return;

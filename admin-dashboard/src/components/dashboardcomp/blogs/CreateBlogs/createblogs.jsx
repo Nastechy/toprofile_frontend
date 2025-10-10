@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { MdOutlineCancelPresentation } from "react-icons/md";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+import React, { useState } from 'react';
+import { MdOutlineCancelPresentation } from 'react-icons/md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
-const Createblogs = ({
-  handleCloseModal,
-  blogId = null,
-  existingBlogData = {},
-  fetchBlogs,
-}) => {
+const Createblogs = ({ handleCloseModal, blogId = null, existingBlogData = {}, fetchBlogs }) => {
   const [showForm, setShowForm] = useState(true);
 
   // Load existing blog data if updating
@@ -20,25 +15,23 @@ const Createblogs = ({
     const token = getTokenTOLocalStorage();
 
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
 
     try {
       // Prepare FormData
       const formData = new FormData();
-      formData.append("title", values.title);
-      formData.append("body", values.text);
-      formData.append("author_name", values.name);
-      formData.append("reading_time", values.readingtime);
+      formData.append('title', values.title);
+      formData.append('body', values.text);
+      formData.append('author_name', values.name);
+      formData.append('reading_time', values.readingtime);
       if (values.image) {
-        formData.append("image", values.image);
+        formData.append('image', values.image);
       }
 
-      const requestMethod = isUpdating ? "PUT" : "POST";
-      const endpoint = isUpdating
-        ? `${URL}/blog/${blogId}/`
-        : `${URL}/blog/`;
+      const requestMethod = isUpdating ? 'PUT' : 'POST';
+      const endpoint = isUpdating ? `${URL}/blog/${blogId}/` : `${URL}/blog/`;
 
       // Make a POST/PUT request to the API
       const response = await fetch(endpoint, {
@@ -54,12 +47,12 @@ const Createblogs = ({
         resetForm();
         setShowForm(false);
         handleCloseModal(); // Optionally hide the form
-        console.log("Blog submitted successfully!");
+        console.log('Blog submitted successfully!');
       } else {
-        console.error("Failed to submit blog:", response.statusText);
+        console.error('Failed to submit blog:', response.statusText);
       }
     } catch (error) {
-      console.error("Error submitting blog:", error);
+      console.error('Error submitting blog:', error);
     } finally {
       setSubmitting(false);
     }
@@ -69,29 +62,26 @@ const Createblogs = ({
     const token = getTokenTOLocalStorage();
 
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
 
     try {
-      const response = await fetch(
-        `${URL}/blog/${blogId}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`, // Use the token
-          },
-        }
-      );
+      const response = await fetch(`${URL}/blog/${blogId}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`, // Use the token
+        },
+      });
 
       if (response.ok) {
         handleCloseModal();
-        console.log("Blog deleted successfully!");
+        console.log('Blog deleted successfully!');
       } else {
-        console.error("Failed to delete blog:", response.statusText);
+        console.error('Failed to delete blog:', response.statusText);
       }
     } catch (error) {
-      console.error("Error deleting blog:", error);
+      console.error('Error deleting blog:', error);
     }
   };
 
@@ -108,26 +98,26 @@ const Createblogs = ({
         {showForm && (
           <Formik
             initialValues={{
-              title: existingBlogData.title || "",
-              name: existingBlogData.name || "",
-              readingtime: existingBlogData.readingtime || "",
-              text: existingBlogData.text || "",
+              title: existingBlogData.title || '',
+              name: existingBlogData.name || '',
+              readingtime: existingBlogData.readingtime || '',
+              text: existingBlogData.text || '',
               image: null, // File input is always null initially
             }}
             validationSchema={Yup.object({
-              title: Yup.string().required("Field cannot be empty"),
-              name: Yup.string().required("Field cannot be empty"),
-              readingtime: Yup.string().required("Field cannot be empty"),
-              text: Yup.string().required("Field cannot be empty"),
+              title: Yup.string().required('Field cannot be empty'),
+              name: Yup.string().required('Field cannot be empty'),
+              readingtime: Yup.string().required('Field cannot be empty'),
+              text: Yup.string().required('Field cannot be empty'),
               image: Yup.mixed()
                 .nullable()
-                .test("fileSize", "File size is too large", (value) => {
+                .test('fileSize', 'File size is too large', (value) => {
                   if (!value) return true;
                   return value.size <= 5 * 1024 * 1024; // Max 5MB
                 })
-                .test("fileType", "Unsupported file type", (value) => {
+                .test('fileType', 'Unsupported file type', (value) => {
                   if (!value) return true;
-                  return ["image/jpeg", "image/png"].includes(value.type);
+                  return ['image/jpeg', 'image/png'].includes(value.type);
                 }),
             })}
             onSubmit={handleSubmit}
@@ -144,11 +134,7 @@ const Createblogs = ({
                     placeholder="Enter blog title"
                     className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                   />
-                  <ErrorMessage
-                    name="title"
-                    component="div"
-                    className="text-red-500 text-xs"
-                  />
+                  <ErrorMessage name="title" component="div" className="text-red-500 text-xs" />
                 </div>
 
                 {/* Author Name and Reading Time */}
@@ -163,11 +149,7 @@ const Createblogs = ({
                       placeholder="Author name"
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                     />
-                    <ErrorMessage
-                      name="name"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
+                    <ErrorMessage name="name" component="div" className="text-red-500 text-xs" />
                   </div>
                   <div className="flex flex-col gap-2 w-[40%]">
                     <label htmlFor="readingtime" className="text-sm">
@@ -199,11 +181,7 @@ const Createblogs = ({
                     placeholder="Write the blog content"
                     className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                   />
-                  <ErrorMessage
-                    name="text"
-                    component="div"
-                    className="text-red-500 text-sm"
-                  />
+                  <ErrorMessage name="text" component="div" className="text-red-500 text-sm" />
                 </div>
 
                 {/* Image Upload */}
@@ -216,15 +194,11 @@ const Createblogs = ({
                     name="image"
                     accept="image/jpeg, image/png"
                     onChange={(event) => {
-                      setFieldValue("image", event.currentTarget.files[0]);
+                      setFieldValue('image', event.currentTarget.files[0]);
                     }}
                     className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm"
                   />
-                  <ErrorMessage
-                    name="image"
-                    component="div"
-                    className="text-red-500 text-xs"
-                  />
+                  <ErrorMessage name="image" component="div" className="text-red-500 text-xs" />
                 </div>
 
                 {/* Submit, Update and Delete buttons */}

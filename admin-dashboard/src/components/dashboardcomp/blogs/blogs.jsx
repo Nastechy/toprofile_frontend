@@ -1,15 +1,14 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { MdAdd } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
-import { IoMdEye } from "react-icons/io";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import Createblogs from "./CreateBlogs/createblogs";
-import UpdateBlog from "./UpdateBlogs/updateblog";
-import Image from "next/image";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { MdAdd } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi';
+import { MdDeleteOutline } from 'react-icons/md';
+import { IoMdEye } from 'react-icons/io';
+import Createblogs from './CreateBlogs/createblogs';
+import UpdateBlog from './UpdateBlogs/updateblog';
+import Image from 'next/image';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const Blogs = () => {
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +25,7 @@ const Blogs = () => {
       const date = new Date(dateString);
       return date.toLocaleDateString(); // Format as "MM/DD/YYYY"
     } catch (error) {
-      return "Invalid date";
+      return 'Invalid date';
     }
   };
 
@@ -38,14 +37,14 @@ const Blogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(`${URL}/blog/`, {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
       setBlogs(data.data);
@@ -58,8 +57,8 @@ const Blogs = () => {
 
   useEffect(() => {
     if (!token) {
-      console.error("No token found, please log in");
-      setError("No token found, please log in");
+      console.error('No token found, please log in');
+      setError('No token found, please log in');
       setLoading(false);
       return;
     }
@@ -68,19 +67,16 @@ const Blogs = () => {
 
   const handleDeleteBlog = async (slug) => {
     try {
-      const response = await fetch(
-        `${URL}/blog/${slug}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/blog/${slug}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to delete the blog");
+        throw new Error('Failed to delete the blog');
       }
 
       fetchBlogs();
@@ -99,7 +95,6 @@ const Blogs = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-
 
   return (
     <div className="bg-white h-screen">
@@ -136,8 +131,8 @@ const Blogs = () => {
                     <td className="px-4 py-3">
                       <div className="flex items-center">
                         <Image
-                          src={datum.image || "/placeholder.png"}
-                          alt={datum.title || "blog"}
+                          src={datum.image || '/placeholder.png'}
+                          alt={datum.title || 'blog'}
                           width={60}
                           height={60}
                           className="w-[60px] h-[60px] object-cover rounded"
@@ -195,15 +190,11 @@ const Blogs = () => {
         </div>
       </div>
 
-
       {/* Modal components */}
       {showModal && (
         <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="relative w-[70%] bg-white shadow-2xl rounded-lg overflow-y-auto">
-            <Createblogs
-              handleCloseModal={handleCloseModal}
-              fetchBlogs={fetchBlogs}
-            />
+            <Createblogs handleCloseModal={handleCloseModal} fetchBlogs={fetchBlogs} />
           </div>
         </div>
       )}
