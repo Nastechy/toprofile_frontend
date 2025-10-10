@@ -1,16 +1,13 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import { IoMdCheckmark } from "react-icons/io";
-import kam from "../../../../public/img/man.png";
-import Link from "next/link";
-import Image from "next/image";
-import { MdDeleteOutline } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import CreateTeam from "./CreateTeam/createteam";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import Image from 'next/image';
+import { MdDeleteOutline } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi';
+import CreateTeam from './CreateTeam/createteam';
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const Teams = () => {
   const [showModal, setShowModal] = useState(false);
@@ -26,62 +23,56 @@ const Teams = () => {
       const date = new Date(dateString);
       return date.toLocaleDateString(); // Format as "MM/DD/YYYY" or use other formats as needed
     } catch (error) {
-      return "Invalid date"; // Return a default value if there's an error
+      return 'Invalid date'; // Return a default value if there's an error
     }
   };
   if (!token) {
-    console.error("No token found, please log in");
+    console.error('No token found, please log in');
     return;
   }
   const handleDeleteTeam = async (id) => {
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
     try {
-      const response = await fetch(
-        `${URL}/our_team/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/our_team/${id}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to delete the blog");
+        throw new Error('Failed to delete the blog');
       }
 
       fetchTeam();
     } catch (error) {
-      console.error("Error deleting blog:", error);
+      console.error('Error deleting blog:', error);
       setError(error.message);
     }
   };
-  console.log("reponse>>>", team);
+  console.log('reponse>>>', team);
   const handleEditClick = (ourTeam) => {
     setShowTeamModal(true);
     setSelectedTeam(ourTeam); // Pass the blog data to the modal
   };
   const fetchTeam = async () => {
     try {
-      const response = await fetch(
-        `${URL}/our_team/`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/our_team/`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log("data", data);
+      console.log('data', data);
       setTeam(data.data); // Assuming the response is in the expected format
     } catch (error) {
       setError(error.message);
@@ -113,7 +104,6 @@ const Teams = () => {
         </button>
       </div>
 
-
       <div className="px-10 xl:px-16">
         <div className="overflow-x-auto border border-slate-200 rounded">
           <table className="min-w-full table-auto text-sm xl:text-base">
@@ -137,8 +127,10 @@ const Teams = () => {
                     <td className="px-4 py-3">
                       <div className="flex items-center">
                         <Image
-                          src={datum.image || "/placeholder.png"}
-                          alt={`${datum.first_name ?? ""} ${datum.last_name ?? ""}`.trim() || "team"}
+                          src={datum.image || '/placeholder.png'}
+                          alt={
+                            `${datum.first_name ?? ''} ${datum.last_name ?? ''}`.trim() || 'team'
+                          }
                           width={60}
                           height={60}
                           className="w-[60px] h-[60px] object-cover rounded"
@@ -193,12 +185,9 @@ const Teams = () => {
         </div>
       </div>
 
-
       <div className="flex justify-between items-center px-5 pt-[300px] pb-10 ">
         <div>
-          <p className="text-sm text-slate-500">
-            Showing 1 to 10 of 20 entries
-          </p>
+          <p className="text-sm text-slate-500">Showing 1 to 10 of 20 entries</p>
         </div>
         <div className="flex items-center justify-center text-slate-500 text-sm gap-3">
           <div className="flex items-center gap-1 rounded-md border border-slate-300 p-2">
@@ -217,7 +206,7 @@ const Teams = () => {
         <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
           <div className="relative w-[70%] top-6 left-[8rem] xl:left-[9rem] xl:top-[1.5rem] h-[80vh] bg-white  shadow-2xl rounded-lg overflow-y-auto">
             {/* Your modal content goes here */}
-            <CreateTeam handleCloseModal={handleCloseModal} />{" "}
+            <CreateTeam handleCloseModal={handleCloseModal} />{' '}
             {/* This assumes your modal content is in the Notifications component */}
           </div>
         </div>

@@ -1,11 +1,10 @@
-"use client";
-import React, { useState } from "react";
-import { MdOutlineCancelPresentation } from "react-icons/md";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Link from "next/link";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useState } from 'react';
+import { MdOutlineCancelPresentation } from 'react-icons/md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 // Define the image conversion function
 const convertToBase64 = (file) => {
@@ -21,13 +20,13 @@ const CreateTeam = ({ handleCloseModal }) => {
   const [showForm, setShowForm] = useState(true); // State to control form visibility
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log("Form Submitted:", values);
+    console.log('Form Submitted:', values);
 
     const token = getTokenTOLocalStorage();
-    console.log("Token:", token);
+    console.log('Token:', token);
 
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       setSubmitting(false); // Set submitting to false to avoid infinite loading
       return;
     }
@@ -50,35 +49,32 @@ const CreateTeam = ({ handleCloseModal }) => {
         image: base64Image, // Attach the Base64 image string here
       };
 
-      console.log("Payload:", payload);
+      console.log('Payload:', payload);
 
-      const response = await fetch(
-        `${URL}/our_team/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Use the token
-          },
-          body: JSON.stringify(payload), // Send JSON payload
-        }
-      );
+      const response = await fetch(`${URL}/our_team/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Use the token
+        },
+        body: JSON.stringify(payload), // Send JSON payload
+      });
 
-      console.log("Response:", response);
+      console.log('Response:', response);
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Error from server:", errorData);
-        throw new Error(errorData.message || "Failed to create team member");
+        console.error('Error from server:', errorData);
+        throw new Error(errorData.message || 'Failed to create team member');
       }
 
       const data = await response.json();
-      console.log("Team member created:", data);
+      console.log('Team member created:', data);
 
       resetForm(); // Reset form after successful submission
       setShowForm(false); // Hide the form
     } catch (error) {
-      console.error("Failed to create team member:", error.message);
+      console.error('Failed to create team member:', error.message);
     } finally {
       setSubmitting(false);
     }
@@ -88,10 +84,7 @@ const CreateTeam = ({ handleCloseModal }) => {
     <div className="">
       <div className="flex items-center justify-between px-20 pt-10 pb-5 ">
         <p className="text-xl">Create Team Member</p>
-        <MdOutlineCancelPresentation
-          className="h-6 w-6"
-          onClick={handleCloseModal}
-        />
+        <MdOutlineCancelPresentation className="h-6 w-6" onClick={handleCloseModal} />
       </div>
       <div className="px-20 ">
         <div className="border-b border-slate-300 "></div>
@@ -100,24 +93,24 @@ const CreateTeam = ({ handleCloseModal }) => {
         <div>
           <Formik
             initialValues={{
-              firstname: "",
-              lastname: "",
-              postion: "",
-              facebook: "",
-              twitter: "",
-              instagram: "",
-              mail: "",
+              firstname: '',
+              lastname: '',
+              postion: '',
+              facebook: '',
+              twitter: '',
+              instagram: '',
+              mail: '',
               file: null,
             }}
             validationSchema={Yup.object({
-              firstname: Yup.string().required("First Name is required"),
-              lastname: Yup.string().required("Last Name is required"),
-              postion: Yup.string().required("Position is required"),
-              file: Yup.mixed().required("File is required"),
-              facebook: Yup.string().required("Facebook link is required"),
-              twitter: Yup.string().required("Twitter link is required"),
-              instagram: Yup.string().required("Instagram link is required"),
-              mail: Yup.string().required("Email is required"),
+              firstname: Yup.string().required('First Name is required'),
+              lastname: Yup.string().required('Last Name is required'),
+              postion: Yup.string().required('Position is required'),
+              file: Yup.mixed().required('File is required'),
+              facebook: Yup.string().required('Facebook link is required'),
+              twitter: Yup.string().required('Twitter link is required'),
+              instagram: Yup.string().required('Instagram link is required'),
+              mail: Yup.string().required('Email is required'),
             })}
             onSubmit={handleSubmit}
           >
@@ -167,15 +160,11 @@ const CreateTeam = ({ handleCloseModal }) => {
                       type="file"
                       name="file"
                       onChange={(event) => {
-                        setFieldValue("file", event.currentTarget.files[0]);
+                        setFieldValue('file', event.currentTarget.files[0]);
                       }}
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm focus-visible:bg-white focus-visible:text-blu focus-visible:border-slate-400"
                     />
-                    <ErrorMessage
-                      name="file"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
+                    <ErrorMessage name="file" component="div" className="text-red-500 text-xs" />
                   </div>
                   <div className="flex flex-col gap-2 w-[40%] xl:w-[45%]">
                     <label htmlFor="postion" className="text-sm">
@@ -187,11 +176,7 @@ const CreateTeam = ({ handleCloseModal }) => {
                       placeholder="Architect"
                       className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm focus-visible:bg-white focus-visible:text-blu focus-visible:border-slate-400"
                     />
-                    <ErrorMessage
-                      name="postion"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
+                    <ErrorMessage name="postion" component="div" className="text-red-500 text-xs" />
                   </div>
                 </div>
 
@@ -261,11 +246,7 @@ const CreateTeam = ({ handleCloseModal }) => {
                         placeholder="Post link"
                         className="outline-none border text-black border-slate-200 bg-transparent rounded px-4 py-2 text-sm focus-visible:bg-white focus-visible:text-blu focus-visible:border-slate-400"
                       />
-                      <ErrorMessage
-                        name="mail"
-                        component="div"
-                        className="text-red-500 text-xs"
-                      />
+                      <ErrorMessage name="mail" component="div" className="text-red-500 text-xs" />
                     </div>
                   </div>
                 </div>
@@ -275,10 +256,10 @@ const CreateTeam = ({ handleCloseModal }) => {
                     type="submit"
                     disabled={isSubmitting}
                     className={`text-white bg-blue-500 text-sm py-2 px-10 rounded ${
-                      isSubmitting ? "opacity-50" : "hover:bg-blue-700"
+                      isSubmitting ? 'opacity-50' : 'hover:bg-blue-700'
                     }`}
                   >
-                    {isSubmitting ? "Submitting..." : "Create"}
+                    {isSubmitting ? 'Submitting...' : 'Create'}
                   </button>
                 </div>
               </Form>

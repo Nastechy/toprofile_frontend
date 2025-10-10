@@ -1,21 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import { IoMdCheckmark } from "react-icons/io";
-import kam from "../../../../public/img/man.png";
-import Link from "next/link";
-import Image from "next/image";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaRegDotCircle } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
-import { IoMdEye } from "react-icons/io";
-import { MdDeleteOutline } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import CreateTestimonial from "./CreateTestimonial/createTestimonial";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import UpdateTestimonial from "./UpdateTestimonial/updateTestimonial";
-import { getTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import Image from 'next/image';
+import { MdDeleteOutline } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi';
+import CreateTestimonial from './CreateTestimonial/createTestimonial';
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
+import UpdateTestimonial from './UpdateTestimonial/updateTestimonial';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const Testimonials = () => {
   const [testimonial, setTestimonials] = useState([]);
@@ -39,26 +32,23 @@ const Testimonials = () => {
     setShowModal(false); // Close modal
   };
   if (!token) {
-    console.error("No token found, please log in");
+    console.error('No token found, please log in');
     return;
   }
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch(
-        `${URL}/testimony/`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/testimony/`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log("data", data);
+      console.log('data', data);
       setTestimonials(data.data); // Assuming the response is in the expected format
     } catch (error) {
       setError(error.message);
@@ -84,33 +74,30 @@ const Testimonials = () => {
 
   const handleDeleteBlog = async (id) => {
     if (!token) {
-      console.error("No token found, please log in");
+      console.error('No token found, please log in');
       return;
     }
     try {
-      const response = await fetch(
-        `${URL}/testimony/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${URL}/testimony/${id}/`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to delete the blog");
+        throw new Error('Failed to delete the blog');
       }
 
       // After successful deletion, refetch the blogs to update the UI
       fetchTestimonials();
     } catch (error) {
-      console.error("Error deleting blog:", error);
+      console.error('Error deleting blog:', error);
       setError(error.message);
     }
   };
-  console.log("testi>>>", testimonial);
+  console.log('testi>>>', testimonial);
   return (
     <div className="bg-white ">
       <div className="flex justify-end items-center  px-10 lg:py-5 xl:px-16 xl:py-10">
@@ -140,15 +127,13 @@ const Testimonials = () => {
               {Array.isArray(testimonial) && testimonial.length > 0 ? (
                 testimonial.map((datum, index) => (
                   <tr key={datum.id ?? index} className="border-t">
-                    <td className="px-4 py-3">
-                      {index + 1}
-                    </td>
+                    <td className="px-4 py-3">{index + 1}</td>
 
                     <td className="px-4 py-3">
                       <div className="flex items-center">
                         <Image
-                          src={datum.image || "/placeholder.png"}
-                          alt={datum.name || "testimonial"}
+                          src={datum.image || '/placeholder.png'}
+                          alt={datum.name || 'testimonial'}
                           width={60}
                           height={60}
                           className="w-[60px] h-[60px] object-cover rounded"
@@ -201,12 +186,9 @@ const Testimonials = () => {
         </div>
       </div>
 
-
       <div className="flex justify-between items-center  px-5 pt-[300px] pb-10 ">
         <div>
-          <p className="text-sm text-slate-500">
-            Showing 1 to 10 of 20 entries
-          </p>
+          <p className="text-sm text-slate-500">Showing 1 to 10 of 20 entries</p>
         </div>
         <div className="flex items-center justify-center text-slate-500 gap-3">
           <div className="flex items-center gap-1 border rounded-md border-slate-300 p-2">
@@ -228,7 +210,7 @@ const Testimonials = () => {
             <CreateTestimonial
               handleCloseModal={handleCloseModal}
               fetchTestimonials={fetchTestimonials}
-            />{" "}
+            />{' '}
             {/* This assumes your modal content is in the Notifications component */}
           </div>
         </div>

@@ -1,4 +1,3 @@
-
 // export const addTokenTOLocalStorage = (token) => {
 //     localStorage.setItem("token", JSON.stringify(token));
 //   };
@@ -12,25 +11,21 @@
 //     localStorage.removeItem("token");
 //   };
 
-
-
-
-
 // src/components/utils/storage.js
 const hasStorage = () =>
-  typeof window !== "undefined" && typeof window.localStorage !== "undefined";
+  typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
 
 export const addTokenTOLocalStorage = (token) => {
   if (!hasStorage()) return;
   try {
-    window.localStorage.setItem("token", JSON.stringify(token));
+    window.localStorage.setItem('token', JSON.stringify(token));
   } catch {}
 };
 
 export const getTokenTOLocalStorage = () => {
   if (!hasStorage()) return null;
   try {
-    const v = window.localStorage.getItem("token");
+    const v = window.localStorage.getItem('token');
     return v ? JSON.parse(v) : null;
   } catch {
     return null;
@@ -40,6 +35,8 @@ export const getTokenTOLocalStorage = () => {
 export const removeTokenFromLocalStorage = () => {
   if (!hasStorage()) return;
   try {
-    window.localStorage.removeItem("token");
-  } catch {}
+    window.localStorage.removeItem('token');
+  } catch {
+    console.log('kkk');
+  }
 };
