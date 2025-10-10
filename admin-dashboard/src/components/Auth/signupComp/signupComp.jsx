@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useToast } from "@chakra-ui/react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Image from "next/image";
-import Link from "next/link";
-import axios from "axios";
-import { BsFillEyeSlashFill, BsFillEyeFill } from "react-icons/bs";
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@chakra-ui/react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import Image from 'next/image';
+import Link from 'next/link';
+import axios from 'axios';
+import { BsFillEyeSlashFill, BsFillEyeFill } from 'react-icons/bs';
 
-import styles from "./signupcomp.module.css";
-import Bgg from "../../../../public/img/bgg.jpeg";
-import bg from "../../../../public/img/to.png";
-import { URL } from "@/components/utils/client";
+import styles from './signupcomp.module.css';
+import Bgg from '../../../../public/img/bgg.jpeg';
+import bg from '../../../../public/img/to.png';
+import { URL } from '@/components/utils/client';
 
 const SignupComp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,43 +26,40 @@ const SignupComp = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post(
-        `${URL}/auth/sign-up/`,
-        {
-          username: values.username,
-          email: values.email,
-          phonenumber: values.phone, // Phone number included in the payload
-          password: values.password,
-        }
-      );
-      console.log(response)
+      const response = await axios.post(`${URL}/auth/sign-up/`, {
+        username: values.username,
+        email: values.email,
+        phonenumber: values.phone, // Phone number included in the payload
+        password: values.password,
+      });
+      console.log(response);
       if (response.status === 201) {
         toast({
-          title: "Registration Successful",
-          description: "You have successfully registered.",
-          status: "success",
-          position: "top",
+          title: 'Registration Successful',
+          description: 'You have successfully registered.',
+          status: 'success',
+          position: 'top',
           duration: 5000,
           isClosable: true,
         });
-        router.push("/auth/login"); // Redirect after successful registration
+        router.push('/auth/login'); // Redirect after successful registration
       } else {
         toast({
-          title: "Authentication Failed",
-          description: "Signup Failed.",
-          status: "error",
-          position: "top",
+          title: 'Authentication Failed',
+          description: 'Signup Failed.',
+          status: 'error',
+          position: 'top',
           duration: 5000,
           isClosable: true,
         });
       }
     } catch (error) {
-      console.error("Authentication error:", error);
+      console.error('Authentication error:', error);
       toast({
-        title: "Authentication Failed",
-        description: "An error occurred during authentication.",
-        status: "error",
-        position: "top",
+        title: 'Authentication Failed',
+        description: 'An error occurred during authentication.',
+        status: 'error',
+        position: 'top',
         duration: 5000,
         isClosable: true,
       });
@@ -73,11 +70,7 @@ const SignupComp = () => {
   return (
     <section className="flex flex-col lg:flex-row">
       <div className="flex-1">
-        <Image
-          src={Bgg}
-          className="h-screen w-full"
-          alt="bgg-img"
-        />
+        <Image src={Bgg} className="h-screen w-full" alt="bgg-img" />
       </div>
       <div className="flex-1 bg-white flex items-center justify-center py-10">
         <div className="flex flex-col justify-center gap-5 md:gap-10 lg:gap-5">
@@ -99,20 +92,20 @@ const SignupComp = () => {
             <div className="w-[80%]">
               <Formik
                 initialValues={{
-                  username: "",
-                  email: "",
-                  phone: "", // Phone number field
-                  password: "",
+                  username: '',
+                  email: '',
+                  phone: '', // Phone number field
+                  password: '',
                 }}
                 validationSchema={Yup.object({
                   email: Yup.string()
-                    .email("Invalid email address")
-                    .required("Field cannot be empty"),
-                  username: Yup.string().required("Field cannot be empty"),
-                  phone: Yup.string().required("Field cannot be empty"), // Phone number validation
+                    .email('Invalid email address')
+                    .required('Field cannot be empty'),
+                  username: Yup.string().required('Field cannot be empty'),
+                  phone: Yup.string().required('Field cannot be empty'), // Phone number validation
                   password: Yup.string()
-                    .min(6, "Password should be at least 6 characters")
-                    .required("Field cannot be empty"),
+                    .min(6, 'Password should be at least 6 characters')
+                    .required('Field cannot be empty'),
                 })}
                 onSubmit={handleSubmit}
               >
@@ -165,13 +158,10 @@ const SignupComp = () => {
                         <Field
                           className="outline-none bg-transparent"
                           placeholder="Password"
-                          type={showPassword ? "text" : "password"}
+                          type={showPassword ? 'text' : 'password'}
                           name="password"
                         />
-                        <div
-                          className="text-lite"
-                          onClick={togglePasswordVisibility}
-                        >
+                        <div className="text-lite" onClick={togglePasswordVisibility}>
                           {showPassword ? (
                             <BsFillEyeFill className={styles.icon} />
                           ) : (

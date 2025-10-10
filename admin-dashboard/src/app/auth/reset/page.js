@@ -1,12 +1,12 @@
-import ResetComp from '@/components/Auth/resetComp/resetComp'
-import React from 'react'
+import ResetComp from '@/components/Auth/resetComp/resetComp';
+import React from 'react';
 
 const page = () => {
   return (
     <div>
-        <ResetComp />
+      <ResetComp />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
