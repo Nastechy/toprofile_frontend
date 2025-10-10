@@ -1,22 +1,13 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import { IoMdCheckmark } from "react-icons/io";
-import kam from "../../../../public/img/man.png";
-import Link from "next/link";
-import Image from "next/image";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaRegDotCircle } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
-import { IoMdEye } from "react-icons/io";
-import { MdDeleteOutline } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import Image from 'next/image';
 // import CreateProperty from "./CreateProperty/createproperty";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import axios from "axios";
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
+import axios from 'axios';
 
 const About = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [, setShowModal] = useState(false);
 
   function truncateDescription(description, maxLength) {
     // Check if the description is defined and has a valid length
@@ -45,20 +36,17 @@ const About = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(
-          `https://backend.toprofile.com/api/v1/property`,
-          {
-            params: {
-              page: currentPage,
-              per_page: itemsPerPage,
-            },
-          }
-        );
+        const response = await axios.get(`https://backend.toprofile.com/api/v1/property`, {
+          params: {
+            page: currentPage,
+            per_page: itemsPerPage,
+          },
+        });
         setProperties(response.data.data);
         setTotalPages(response.data.meta_data.total_page);
         setTotalEntries(response.data.meta_data.total);
       } catch (err) {
-        setError("Failed to fetch properties");
+        setError('Failed to fetch properties');
         console.error(err);
       }
     };
@@ -102,9 +90,7 @@ const About = () => {
                     <p className="text-center text-sm font-medium">Title</p>
                   </th>
                   <th className="w-[30%]">
-                    <p className="text-center text-sm font-medium">
-                      Description
-                    </p>
+                    <p className="text-center text-sm font-medium">Description</p>
                   </th>
 
                   <th className="w-[15%]">
@@ -120,9 +106,7 @@ const About = () => {
                   <td className="w-[10%] ">
                     <div className="flex items-center gap-2 justify-center">
                       {/* <input type='checkbox' /> */}
-                      <p className="text-xs  text-black font-semibold">
-                        {datum.idUser}
-                      </p>
+                      <p className="text-xs  text-black font-semibold">{datum.idUser}</p>
                     </div>
                   </td>
                   <td className="w-[15%] ">
@@ -138,16 +122,12 @@ const About = () => {
                   </td>
                   <td className=" w-[30%]">
                     <div className="text-center ">
-                      <p className="text-xs">
-                        {truncateDescription(datum.title, 20)}
-                      </p>
+                      <p className="text-xs">{truncateDescription(datum.title, 20)}</p>
                     </div>
                   </td>
                   <td className="w-[30%] ">
                     <div className="text-center ">
-                      <p className="text-xs">
-                        {truncateDescription(datum.desc, 40)}
-                      </p>
+                      <p className="text-xs">{truncateDescription(datum.desc, 40)}</p>
                     </div>
                   </td>
 
@@ -169,16 +149,14 @@ const About = () => {
       <div className="flex justify-between items-center px-5 pt-[300px] pb-10 ">
         <div>
           <p className="text-sm text-slate-500">
-            Showing{" "}
-            {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{" "}
-            {Math.min(currentPage * itemsPerPage, totalEntries)} of{" "}
-            {totalEntries} entries
+            Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalEntries)} to{' '}
+            {Math.min(currentPage * itemsPerPage, totalEntries)} of {totalEntries} entries
           </p>
         </div>
         <div className="flex items-center justify-center text-slate-500 text-sm">
           <div
             className={`flex items-center gap-2 border border-slate-300 p-2 ${
-              currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+              currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
             }`}
             onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
           >
@@ -190,9 +168,7 @@ const About = () => {
             <div
               key={index}
               className={`border border-slate-300 px-4 py-2 ${
-                currentPage === index + 1
-                  ? "bg-lite text-white"
-                  : "hover:bg-lite hover:text-white"
+                currentPage === index + 1 ? 'bg-lite text-white' : 'hover:bg-lite hover:text-white'
               } cursor-pointer`}
               onClick={() => setCurrentPage(index + 1)}
             >
@@ -202,13 +178,9 @@ const About = () => {
 
           <div
             className={`flex items-center gap-2 border border-slate-300 p-2 ${
-              currentPage === totalPages
-                ? "cursor-not-allowed"
-                : "cursor-pointer"
+              currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'
             }`}
-            onClick={() =>
-              currentPage < totalPages && setCurrentPage(currentPage + 1)
-            }
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
           >
             <p className="text-sm">Next</p>
             <IoIosArrowRoundForward className="h-6 w-6" />

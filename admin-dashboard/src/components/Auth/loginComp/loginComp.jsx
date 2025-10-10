@@ -1,17 +1,17 @@
-"use client";
-import React, { useState } from "react";
-import { BsFillEyeSlashFill, BsFillEyeFill } from "react-icons/bs";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useToast } from "@chakra-ui/react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Bgg from "../../../../public/img/bgg.jpeg";
-import bg from "../../../../public/img/to.png";
-import styles from "./logincomp.module.css";
-import Image from "next/image";
-import { addTokenTOLocalStorage } from "@/components/utils/storage";
-import { URL } from "@/components/utils/client";
+'use client';
+import React, { useState } from 'react';
+import { BsFillEyeSlashFill, BsFillEyeFill } from 'react-icons/bs';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@chakra-ui/react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import Bgg from '../../../../public/img/bgg.jpeg';
+import bg from '../../../../public/img/to.png';
+import styles from './logincomp.module.css';
+import Image from 'next/image';
+import { addTokenTOLocalStorage } from '@/components/utils/storage';
+import { URL } from '@/components/utils/client';
 
 const LoginComp = () => {
   const toast = useToast();
@@ -25,51 +25,48 @@ const LoginComp = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch(
-        `${URL}/auth/login/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        }
-      );
+      const response = await fetch(`${URL}/auth/login/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
 
       if (response.ok) {
         const data = await response.json(); // Parse the JSON response
-        addTokenTOLocalStorage(data.data.access)
+        addTokenTOLocalStorage(data.data.access);
         toast({
-          title: "Login Successful",
-          description: "You have successfully logged in.",
-          status: "success",
-          position: "top",
+          title: 'Login Successful',
+          description: 'You have successfully logged in.',
+          status: 'success',
+          position: 'top',
           duration: 5000,
           isClosable: true,
         });
         // Optionally store the token or user data here
-        router.push("/admin/dashboard");
+        router.push('/admin/dashboard');
       } else {
         const errorData = await response.json();
         toast({
-          title: "Authentication Failed",
-          description: errorData.message || "Login Failed.",
-          status: "error",
-          position: "top",
+          title: 'Authentication Failed',
+          description: errorData.message || 'Login Failed.',
+          status: 'error',
+          position: 'top',
           duration: 5000,
           isClosable: true,
         });
       }
     } catch (error) {
-      console.error("Authentication error:", error);
+      console.error('Authentication error:', error);
       toast({
-        title: "Authentication Failed",
-        description: "An error occurred during authentication.",
-        status: "error",
-        position: "top",
+        title: 'Authentication Failed',
+        description: 'An error occurred during authentication.',
+        status: 'error',
+        position: 'top',
         duration: 5000,
         isClosable: true,
       });
@@ -91,11 +88,7 @@ const LoginComp = () => {
       <div className="flex-1 bg-white flex items-center justify-center py-10">
         <div className="flex flex-col justify-center gap-5 md:gap-10 lg:gap-5">
           <div className="flex justify-center items-center">
-            <Image
-              src={bg}
-              className="w-[30%] md:w-[50%] lg:w-[30%]"
-              alt="bg-img"
-            />
+            <Image src={bg} className="w-[30%] md:w-[50%] lg:w-[30%]" alt="bg-img" />
           </div>
           <div>
             <p className="text-base md:text-3xl lg:text-xl xl:text-2xl font-bold text-center">
@@ -106,16 +99,16 @@ const LoginComp = () => {
             <div className="w-[80%]">
               <Formik
                 initialValues={{
-                  email: "",
-                  password: "",
+                  email: '',
+                  password: '',
                 }}
                 validationSchema={Yup.object({
                   email: Yup.string()
-                    .email("Invalid email address")
-                    .required("Field cannot be empty"),
+                    .email('Invalid email address')
+                    .required('Field cannot be empty'),
                   password: Yup.string()
-                    .min(6, "Password should be at least 6 characters")
-                    .required("Field cannot be empty"),
+                    .min(6, 'Password should be at least 6 characters')
+                    .required('Field cannot be empty'),
                 })}
                 onSubmit={handleSubmit}
               >
@@ -140,13 +133,10 @@ const LoginComp = () => {
                         <Field
                           className="outline-none bg-transparent"
                           placeholder="Password"
-                          type={showPassword ? "text" : "password"}
+                          type={showPassword ? 'text' : 'password'}
                           name="password"
                         />
-                        <div
-                          className="text-lite"
-                          onClick={togglePasswordVisibility}
-                        >
+                        <div className="text-lite" onClick={togglePasswordVisibility}>
                           {showPassword ? (
                             <BsFillEyeFill className={styles.icon} />
                           ) : (
