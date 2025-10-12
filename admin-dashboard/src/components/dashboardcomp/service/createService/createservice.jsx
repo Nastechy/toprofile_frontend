@@ -6,8 +6,8 @@ import { getTokenTOLocalStorage } from '@/components/utils/storage';
 import { URL } from '@/components/utils/client';
 
 // Function to convert image files to base64
-const fileToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
+export const fileToBase64 = (file) => {
+  return new window.Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
@@ -31,7 +31,7 @@ const CreateService = ({
 
     try {
       // Convert files to base64 and include in the request body
-      const base64Images = await Promise.all(
+      const base64Images = await window.Promise.all(
         Array.from(values.files).map((file) => fileToBase64(file)),
       );
 

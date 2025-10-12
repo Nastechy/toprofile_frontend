@@ -4,5 +4,6 @@
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "editor.codeActionsOnSave": { "source.fixAll.eslint": "always" },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "extensions.ignoreRecommendations": true
 }

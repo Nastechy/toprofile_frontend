@@ -34,10 +34,10 @@ const Service = () => {
   };
 
   const [service, setService] = useState([]);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalEntries, setTotalEntries] = useState(0);
+  const [totalPages] = useState(0);
+  const [totalEntries] = useState(0);
   const itemsPerPage = 10;
 
   const fetchService = async () => {

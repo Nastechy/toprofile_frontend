@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './resetcomp.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -9,20 +9,16 @@ import * as Yup from 'yup';
 import Bgg from '../../../../public/img/bgg.jpeg';
 import bg from '../../../../public/img/to.png';
 import Image from 'next/image';
+import axios from 'axios';
+import { baseUrl } from '@/utils/constants';
 
 const ResetComp = () => {
   const toast = useToast();
   const router = useRouter();
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post(`${NEXT_PUBLIC_BASE_URL}/LoginAdmin`, {
+      const response = await axios.post(`${baseUrl}/LoginAdmin`, {
         email: values.email,
         password: values.password,
       });
@@ -103,7 +99,7 @@ const ResetComp = () => {
                 })}
                 onSubmit={handleSubmit}
               >
-                {({ setFieldValue, values, isSubmitting }) => (
+                {({ isSubmitting }) => (
                   <Form className="flex flex-col gap-4" autoComplete="off">
                     <div className="flex flex-col gap-2 text-gray-500">
                       <Field

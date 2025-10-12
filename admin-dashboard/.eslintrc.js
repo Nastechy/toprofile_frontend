@@ -1,12 +1,13 @@
 module.exports = {
-  extends: [
-    'next',
-    'next/core-web-vitals',
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'prettier', // Ensure this is at the end to override conflicting rules
-    "plugin:prettier/recommended"
-  ],
+  // extends: [
+  //   'next',
+  //   'next/core-web-vitals',
+  //   'eslint:recommended',
+  //   'plugin:react/recommended',
+  //   'prettier', // Ensure this is at the end to override conflicting rules
+  //   "plugin:prettier/recommended"
+  // ],
+  extends: ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
   plugins: ['react', 'prettier'],
   parserOptions: {
     ecmaVersion: 2021,

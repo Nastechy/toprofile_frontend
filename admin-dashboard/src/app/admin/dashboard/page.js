@@ -1,4 +1,5 @@
-import AdminLayout from "../../../components/layouts/AdminLayouts/Adminlayouts";
+import Dashboard from '@/components/dashboardcomp/dashboard/dashboard';
+import AdminLayout from '../../../components/layouts/AdminLayouts/Adminlayouts';
 // import Dashboard from "@/components/dashboardcomp/dashboard/dashboard";
 
 const Page = () => {

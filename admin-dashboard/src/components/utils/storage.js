@@ -19,7 +19,9 @@ export const addTokenTOLocalStorage = (token) => {
   if (!hasStorage()) return;
   try {
     window.localStorage.setItem('token', JSON.stringify(token));
-  } catch {}
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const getTokenTOLocalStorage = () => {

@@ -4,16 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getTokenTOLocalStorage } from '@/components/utils/storage';
 import { URL } from '@/components/utils/client';
-
-// Function to convert image files to base64
-const fileToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
+import { fileToBase64 } from '../createService/createservice';
 
 const UpdateService = ({ handleCloseModal, serviceId, fetchService }) => {
   const [initialData, setInitialData] = useState(null);
@@ -61,7 +52,7 @@ const UpdateService = ({ handleCloseModal, serviceId, fetchService }) => {
 
     try {
       // Convert selected files to base64
-      const base64Images = await Promise.all(
+      const base64Images = await window.Promise.all(
         Array.from(values.files || []).map((file) => fileToBase64(file)),
       );
 

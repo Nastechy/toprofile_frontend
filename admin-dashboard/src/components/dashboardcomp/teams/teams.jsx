@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { useEffect, useState } from 'react';
 import { MdAdd } from 'react-icons/md';
@@ -18,6 +19,11 @@ const Teams = () => {
   const [, setError] = useState(null);
   const token = getTokenTOLocalStorage();
   const [, setSelectedTeam] = useState(null);
+
+  useEffect(() => {
+    fetchTeam();
+  }, [showModal]);
+
   if (!token) {
     console.error('No token found, please log in');
     return;
@@ -72,10 +78,6 @@ const Teams = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchTeam();
-  }, [showModal]);
 
   const handleCreateTeamClick = () => {
     setShowModal((prevState) => !prevState); // Toggle modal visibility

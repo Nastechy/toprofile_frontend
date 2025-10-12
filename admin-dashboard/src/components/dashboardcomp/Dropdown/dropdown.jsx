@@ -7,7 +7,6 @@ import { BiLogOutCircle } from 'react-icons/bi';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
 const Dropdown = () => {
-
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {

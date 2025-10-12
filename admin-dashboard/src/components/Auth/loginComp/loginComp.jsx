@@ -112,7 +112,7 @@ const LoginComp = () => {
                 })}
                 onSubmit={handleSubmit}
               >
-                {({ setFieldValue, values, isSubmitting }) => (
+                {({ isSubmitting }) => (
                   <Form className="flex flex-col gap-4" autoComplete="off">
                     <div className="flex flex-col gap-2 text-gray-500">
                       <Field

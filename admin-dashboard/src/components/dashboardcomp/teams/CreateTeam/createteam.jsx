@@ -5,19 +5,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getTokenTOLocalStorage } from '@/components/utils/storage';
 import { URL } from '@/components/utils/client';
-
-// Define the image conversion function
-const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
+import { fileToBase64 } from '../../service/createService/createservice';
 
 const CreateTeam = ({ handleCloseModal }) => {
-  const [showForm, setShowForm] = useState(true); // State to control form visibility
+  const [, setShowForm] = useState(true); // State to control form visibility
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log('Form Submitted:', values);
@@ -34,7 +25,7 @@ const CreateTeam = ({ handleCloseModal }) => {
     try {
       let base64Image = null;
       if (values.file) {
-        base64Image = await convertToBase64(values.file); // Convert the file to Base64
+        base64Image = await fileToBase64(values.file); // Convert the file to Base64
       }
 
       // Create payload

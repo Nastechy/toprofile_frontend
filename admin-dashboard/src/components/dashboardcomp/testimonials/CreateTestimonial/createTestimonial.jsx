@@ -6,7 +6,7 @@ import { getTokenTOLocalStorage } from '@/components/utils/storage';
 import { URL } from '@/components/utils/client';
 
 const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
+  return new window.Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
@@ -15,8 +15,7 @@ const convertToBase64 = (file) => {
 };
 
 const CreateTestimonial = ({ handleCloseModal, fetchTestimonials }) => {
-  const [showForm, setShowForm] = useState(true); // State to control form visibility
-  const [loading, setLoading] = useState(false);
+  const [, setShowForm] = useState(true); // State to control form visibility
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = getTokenTOLocalStorage();

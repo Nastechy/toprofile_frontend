@@ -11,6 +11,8 @@ const client = axios.create({
 
 client.interceptors.request.use(
   async (config) => {
+    const token = getTokenTOLocalStorage();
+
     if (token) {
       const token = getTokenTOLocalStorage();
       config.headers['Authorization'] = `Bearer ${token}`;
@@ -18,6 +20,7 @@ client.interceptors.request.use(
     return config;
   },
   (error) => {
+    // eslint-disable-next-line no-undef
     return Promise.reject(error);
   },
 );

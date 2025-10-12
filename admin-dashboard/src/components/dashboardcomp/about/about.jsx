@@ -5,6 +5,7 @@ import Image from 'next/image';
 // import CreateProperty from "./CreateProperty/createproperty";
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
 import axios from 'axios';
+import { URL } from '@/components/utils/client';
 
 const About = () => {
   const [, setShowModal] = useState(false);
@@ -22,12 +23,9 @@ const About = () => {
   const handleCreatePropertyClick = () => {
     setShowModal((prevState) => !prevState); // Toggle modal visibility
   };
-  const handleCloseModal = () => {
-    setShowModal(false); // Close modal
-  };
 
   const [properties, setProperties] = useState([]);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalEntries, setTotalEntries] = useState(0);
@@ -36,7 +34,7 @@ const About = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(`https://backend.toprofile.com/api/v1/property`, {
+        const response = await axios.get(`${URL}/property`, {
           params: {
             page: currentPage,
             per_page: itemsPerPage,

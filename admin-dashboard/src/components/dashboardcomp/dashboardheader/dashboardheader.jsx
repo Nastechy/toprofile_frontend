@@ -1,10 +1,8 @@
 'use client';
-import React, {  } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import styles from './dashboardheader.module.css';
 import { TbWorld } from 'react-icons/tb';
-// import { getRequest } from '@/library/request'
-// import axios from 'axios';
 
 import Dropdown from '../Dropdown/dropdown';
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { useEffect, useState } from 'react';
 import { MdAdd } from 'react-icons/md';
@@ -12,13 +13,17 @@ import { URL } from '@/components/utils/client';
 
 const Testimonials = () => {
   const [testimonial, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setLoading] = useState(true);
+  const [, setError] = useState(null);
   const token = getTokenTOLocalStorage();
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
 
   const handleUpdateTestimonialClick = (testimonial) => {
     setSelectedTestimonial(testimonial);
@@ -56,10 +61,6 @@ const Testimonials = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchTestimonials();
-  }, []);
 
   function truncateDescription(description, maxLength) {
     // Check if the description is defined and has a valid length

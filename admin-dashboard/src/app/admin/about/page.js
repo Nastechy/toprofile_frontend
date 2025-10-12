@@ -1,7 +1,7 @@
-import React from "react";
-import AdminLayout from "../../../components/layouts/AdminLayouts/Adminlayouts";
+import React from 'react';
+import AdminLayout from '../../../components/layouts/AdminLayouts/Adminlayouts';
 
-import About from "@/components/dashboardcomp/about/about";
+import About from '@/components/dashboardcomp/about/about';
 
 const Page = () => {
   return (

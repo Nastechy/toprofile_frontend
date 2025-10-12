@@ -4,16 +4,10 @@ import { MdOutlineCancelPresentation } from 'react-icons/md';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { URL } from '@/components/utils/client';
+import { getTokenTOLocalStorage } from '@/components/utils/storage';
+import { fileToBase64 } from '../../service/createService/createservice';
 
 // Define the image conversion function
-const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
 
 const UpdateTeam = ({ handleCloseModal }) => {
   const [, setShowForm] = useState(true); // State to control form visibility
@@ -33,7 +27,7 @@ const UpdateTeam = ({ handleCloseModal }) => {
     try {
       let base64Image = null;
       if (values.file) {
-        base64Image = await convertToBase64(values.file); // Convert the file to Base64
+        base64Image = await fileToBase64(values.file); // Convert the file to Base64
       }
 
       // Create payload
